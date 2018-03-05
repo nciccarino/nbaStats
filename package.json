@@ -1,4 +1,22 @@
 {
+  "name": "nbaStats",
+  "version": "1.0.0",
+  "description": "nbaStats",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nciccarino/nbaStats"
+  },
+  "author": "nick ciccarino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nciccarino/nbaStats/issues"
+  },
+  "homepage": "https://github.com/nciccarino/nbaStats#readme",
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.18.2",
@@ -8,6 +26,7 @@
     "moment": "^2.21.0",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.2",
+    "nba.js": "^0.6.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
