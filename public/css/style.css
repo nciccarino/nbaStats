@@ -62,3 +62,40 @@ body {
 .actionButton:hover {
 	background-color: #999999; 
 }
+
+.modalTables {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    overflow: auto; 
+}
+
+.modalTables td, .modalTables th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.modalTables tr:nth-child(even){background-color: #f2f2f2;}
+
+.modalTables tr:hover {background-color: #ddd;}
+
+.modalTables th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #333333;
+    color: white;
+}
+
+.modal.bottom-sheet {
+	max-height: 100%;
+	height: 100%; 
+}
+
+.modalClose {
+	background-color: #333333;
+}
+
+.modalClose:hover {
+	background-color: #999999; 
+}

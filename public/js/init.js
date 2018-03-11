@@ -2,7 +2,7 @@
   $(function(){
 
     $('.button-collapse').sideNav();
-    $('.parallax').parallax();
+    $('.carousel.carousel-slider').carousel({fullWidth: true});
     $('.modal').modal();
 
   }); // end of document ready

@@ -207,6 +207,9 @@ $(document).ready(function() {
 	}
 
 	function showDetails() {
+
+		$(".statsRows").html("");
+
 		console.log(this)
 		var thisPlayer = this;
 		var thePlayer = thisPlayer.getAttribute("data-person");
@@ -219,6 +222,7 @@ $(document).ready(function() {
       method: 'GET',
       url: '/nba/stats/' + thePlayer
     }).done(function(data) {
+
       console.log(data) 
 
       var careerAll = data.CareerTotalsRegularSeason
@@ -227,11 +231,30 @@ $(document).ready(function() {
       var nbaSeasons = data.SeasonTotalsRegularSeason
       var collegeSeasons = data.SeasonTotalsCollegeSeason
 
-      var totalsSlide = $('<div href="#totals">').addClass("carousel-item red white-text")
-      var totalsTitle = $('<h2>NBA and College Career Totals</h2>')
-	    var totalsTable = $('<table style="width:100%">')
+			var totalsLi = $('<li>').addClass('tableLi')
+      var totalsCol = $('<div class="collapsible-header">NBA and College Career Totals</div>').addClass('liCol')
+      var totalsTab = $('<div class="collapsible-body"></div>')
+	    var totalsTable = $('<table class="modalTables">')
+			
+			var regLi = $('<li>').addClass('tableLi')
+      var regCol = $('<div class="collapsible-header">NBA Regular Sesaon Totals</div>').addClass('liCol')
+      var regTab = $('<div class="collapsible-body"></div>')
+	    var regTable = $('<table class="modalTables">')
+
+			var collLi = $('<li>').addClass('tableLi')
+      var collCol = $('<div class="collapsible-header">College Regular Sesaon Totals</div>').addClass('liCol')
+      var collTab = $('<div class="collapsible-body"></div>')
+	    var collTable = $('<table class="modalTables">')
+
+			var rankLi = $('<li>').addClass('tableLi')
+      var rankCol = $('<div class="collapsible-header">NBA Regular Sesaon Rankings</div>').addClass('liCol')
+      var rankTab = $('<div class="collapsible-body"></div>')
+	    var rankTable = $('<table class="modalTables">')
+
+	    // Totals    
 
 	    var totalsHeaders = $('<tr>')
+	    var totalsLeague = $('<th></th>')
 	    var totalsFGTA = $('<th>3 Point FG Attempts</th>')
 	    var totalsFGTM = $('<th>3 Point FG Total</th>')
 	    var totalsFGA = $('<th>FG Attempts</th>')
@@ -250,53 +273,389 @@ $(document).ready(function() {
 	    var totalsGS = $('<th>Games Sat</th>')
 	    var totalsMin = $('<th>Minutes</th>')
 
+	    totalsHeaders.append(totalsLeague)
+	    totalsHeaders.append(totalsFGTA)
+	    totalsHeaders.append(totalsFGTM)
+	    totalsHeaders.append(totalsFGA)
+	    totalsHeaders.append(totalsFGM)
+	    totalsHeaders.append(totalsFTA)
+	    totalsHeaders.append(totalsFTM)
+	    totalsHeaders.append(totalsPts)
+	    totalsHeaders.append(totalsAssists)
+	    totalsHeaders.append(totalsBlocks)
+	    totalsHeaders.append(totalsDR)
+	    totalsHeaders.append(totalsOR)
+	    totalsHeaders.append(totalsReb)
+	    totalsHeaders.append(totalsStl)
+	    totalsHeaders.append(totalsFouls)
+	    totalsHeaders.append(totalsGP)
+	    totalsHeaders.append(totalsGS)
+	    totalsHeaders.append(totalsMin)
 	    totalsTable.append(totalsHeaders)
-	    totalsTable.append(totalsFGTA)
-	    totalsTable.append(totalsFGTM)
-	    totalsTable.append(totalsFGA)
-	    totalsTable.append(totalsFGM)
-	    totalsTable.append(totalsFTA)
-	    totalsTable.append(totalsFTM)
-	    totalsTable.append(totalsPts)
-	    totalsTable.append(totalsAssists)
-	    totalsTable.append(totalsBlocks)
-	    totalsTable.append(totalsDR)
-	    totalsTable.append(totalsOR)
-	    totalsTable.append(totalsReb)
-	    totalsTable.append(totalsStl)
-	    totalsTable.append(totalsFouls)
-	    totalsTable.append(totalsGP)
-	    totalsTable.append(totalsGS)
-	    totalsTable.append(totalsMin)
 
 	    if (careerAll.length != 0) {
+		    var totalsNBA = $('<tr>')
+		    var nbaTitle = $('<td>NBA</td>')
+		    var fgtaTotals = $('<td>' + careerAll[0].fg3a + '</td>')
+		    var fgtmTotals = $('<td>' + careerAll[0].fg3m + ' (' + Math.round(careerAll[0].fg3_pct * 100) + '%)' + '</td>')
+		    var fgaTotals = $('<td>' + careerAll[0].fga + '</td>')
+		    var fgmTotals = $('<td>' + careerAll[0].fgm + ' (' + Math.round(careerAll[0].fg_pct * 100) + '%)' + '</td>')
+		    var ftaTotals = $('<td>' + careerAll[0].fta + '</td>')
+		    var ftmTotals = $('<td>' + careerAll[0].ftm + ' (' + Math.round(careerAll[0].ft_pct * 100) + '%)' + '</td>')
+		    var ptsTotals = $('<td>' + careerAll[0].pts + '</td>')
+		    var assistsTotals = $('<td>' + careerAll[0].ast + '</td>')
+		    var blocksTotals = $('<td>' + careerAll[0].blk + '</td>')
+		    var drTotals = $('<td>' + careerAll[0].dreb + '</td>')
+		    var orTotals = $('<td>' + careerAll[0].oreb + '</td>')
+		    var rebTotals = $('<td>' + careerAll[0].reb + '</td>')
+		    var stlTotals = $('<td>' + careerAll[0].stl + '</td>')
+		    var foulsTotals = $('<td>' + careerAll[0].pf + '</td>')
+		    var gpTotals = $('<td>' + careerAll[0].gp + '</td>')
+		    var gsTotals = $('<td>' + careerAll[0].gs + '</td>')
+		    var minTotals = $('<td>' + careerAll[0].min + '</td>')
 
+		    totalsNBA.append(nbaTitle)
+		    totalsNBA.append(fgtaTotals)
+		    totalsNBA.append(fgtmTotals)
+		    totalsNBA.append(fgaTotals)
+		    totalsNBA.append(fgmTotals)
+		    totalsNBA.append(ftaTotals)
+		    totalsNBA.append(ftmTotals)
+		    totalsNBA.append(ptsTotals)
+		    totalsNBA.append(assistsTotals)
+		    totalsNBA.append(blocksTotals)
+		    totalsNBA.append(drTotals)
+		    totalsNBA.append(orTotals)
+		    totalsNBA.append(rebTotals)
+		    totalsNBA.append(stlTotals)
+		    totalsNBA.append(foulsTotals)
+		    totalsNBA.append(gpTotals)
+		    totalsNBA.append(gsTotals)
+		    totalsNBA.append(minTotals)
+		    totalsTable.append(totalsNBA)
 	    }
 
-<table style="width:100%">
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th> 
-    <th>Age</th>
-  </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>80</td>
-  </tr>
-</table>
+	    if (collegeAll.length != 0) {
+		    var totalsCollege = $('<tr>')
+		    var collegeTitle = $('<td>College</td>')
+		    var fgtaCollegeTotals = $('<td>' + collegeAll[0].fg3a + '</td>')
+		    var fgtmCollegeTotals = $('<td>' + collegeAll[0].fg3m + ' (' + Math.round(collegeAll[0].fg3_pct * 100) + '%)' + '</td>')
+		    var fgaCollegeTotals = $('<td>' + collegeAll[0].fga + '</td>')
+		    var fgmCollegeTotals = $('<td>' + collegeAll[0].fgm + ' (' + Math.round(collegeAll[0].fg_pct * 100) + '%)' + '</td>')
+		    var ftaCollegeTotals = $('<td>' + collegeAll[0].fta + '</td>')
+		    var ftmCollegeTotals = $('<td>' + collegeAll[0].ftm + ' (' + Math.round(collegeAll[0].ft_pct * 100) + '%)' + '</td>')
+		    var ptsCollegeTotals = $('<td>' + collegeAll[0].pts + '</td>')
+		    var assistsCollegeTotals = $('<td>' + collegeAll[0].ast + '</td>')
+		    var blocksCollegeTotals = $('<td>' + collegeAll[0].blk + '</td>')
+		    var drCollegeTotals = $('<td>' + collegeAll[0].dreb + '</td>')
+		    var orCollegeTotals = $('<td>' + collegeAll[0].oreb + '</td>')
+		    var rebCollegeTotals = $('<td>' + collegeAll[0].reb + '</td>')
+		    var stlCollegeTotals = $('<td>' + collegeAll[0].stl + '</td>')
+		    var foulsCollegeTotals = $('<td>' + collegeAll[0].pf + '</td>')
+		    var gpCollegeTotals = $('<td>' + collegeAll[0].gp + '</td>')
+		    var gsCollegeTotals = $('<td>' + collegeAll[0].gs + '</td>')
+		    var minCollegeTotals = $('<td>' + collegeAll[0].min + '</td>')
 
-      totalsSlide.append(totalsTitle)
+		    totalsCollege.append(collegeTitle)
+		    totalsCollege.append(fgtaCollegeTotals)
+		    totalsCollege.append(fgtmCollegeTotals)
+		    totalsCollege.append(fgaCollegeTotals)
+		    totalsCollege.append(fgmCollegeTotals)
+		    totalsCollege.append(ftaCollegeTotals)
+		    totalsCollege.append(ftmCollegeTotals)
+		    totalsCollege.append(ptsCollegeTotals)
+		    totalsCollege.append(assistsCollegeTotals)
+		    totalsCollege.append(blocksCollegeTotals)
+		    totalsCollege.append(drCollegeTotals)
+		    totalsCollege.append(orCollegeTotals)
+		    totalsCollege.append(rebCollegeTotals)
+		    totalsCollege.append(stlCollegeTotals)
+		    totalsCollege.append(foulsCollegeTotals)
+		    totalsCollege.append(gpCollegeTotals)
+		    totalsCollege.append(gsCollegeTotals)
+		    totalsCollege.append(minCollegeTotals)
+		    totalsTable.append(totalsCollege)
+	    }
+
+	    totalsTab.append(totalsTable)
+	    totalsLi.append(totalsCol)
+	    totalsLi.append(totalsTab)
+
+	    // Regular Season 
+
+	    var regHeaders = $('<tr>')
+	    var regYear = $('<th>Season</th>')
+	    var regTeam = $('<th>Team</th>')
+	    var regFGTA = $('<th>3 Point FG Attempts</th>')
+	    var regFGTM = $('<th>3 Point FG Total</th>')
+	    var regFGA = $('<th>FG Attempts</th>')
+	    var regFGM = $('<th>FG Total</th>')
+	    var regFTA = $('<th>FT Attempts</th>')
+	    var regFTM = $('<th>FT Total</th>')
+	    var regPts = $('<th>Points</th>')
+	    var regAssists = $('<th>Assists</th>')
+	    var regBlocks = $('<th>Blocks</th>')
+	    var regDR = $('<th>Defensive Rebounds</th>')
+	    var regOR = $('<th>Offensive Rebounds</th>')
+	    var regReb = $('<th>Rebounds</th>')
+	    var regStl = $('<th>Steals</th>')
+	    var regFouls = $('<th>Fouls</th>')
+	    var regGP = $('<th>Games Played</th>')
+	    var regGS = $('<th>Games Sat</th>')
+	    var regMin = $('<th>Minutes</th>')
+
+	    regHeaders.append(regYear)
+	    regHeaders.append(regTeam)
+	    regHeaders.append(regFGTA)
+	    regHeaders.append(regFGTM)
+	    regHeaders.append(regFGA)
+	    regHeaders.append(regFGM)
+	    regHeaders.append(regFTA)
+	    regHeaders.append(regFTM)
+	    regHeaders.append(regPts)
+	    regHeaders.append(regAssists)
+	    regHeaders.append(regBlocks)
+	    regHeaders.append(regDR)
+	    regHeaders.append(regOR)
+	    regHeaders.append(regReb)
+	    regHeaders.append(regStl)
+	    regHeaders.append(regFouls)
+	    regHeaders.append(regGP)
+	    regHeaders.append(regGS)
+	    regHeaders.append(regMin)
+	    regTable.append(regHeaders)
+
+	    for(var i = 0; i < nbaSeasons.length; i++) {
+
+		    var regularNBA = $('<tr>')
+		    var yearRegular = $('<td>' + nbaSeasons[i].season_id + '</td>')
+		    var teamRegular = $('<td>' + nbaSeasons[i].team_abbreviation + '</td>')
+		    var fgtaRegular = $('<td>' + nbaSeasons[i].fg3a + '</td>')
+		    var fgtmRegular = $('<td>' + nbaSeasons[i].fg3m + ' (' + Math.round(nbaSeasons[i].fg3_pct * 100) + '%)' + '</td>')
+		    var fgaRegular = $('<td>' + nbaSeasons[i].fga + '</td>')
+		    var fgmRegular = $('<td>' + nbaSeasons[i].fgm + ' (' + Math.round(nbaSeasons[i].fg_pct * 100) + '%)' + '</td>')
+		    var ftaRegular = $('<td>' + nbaSeasons[i].fta + '</td>')
+		    var ftmRegular = $('<td>' + nbaSeasons[i].ftm + ' (' + Math.round(nbaSeasons[i].ft_pct * 100) + '%)' + '</td>')
+		    var ptsRegular = $('<td>' + nbaSeasons[i].pts + '</td>')
+		    var assistsRegular = $('<td>' + nbaSeasons[i].ast + '</td>')
+		    var blocksRegular = $('<td>' + nbaSeasons[i].blk + '</td>')
+		    var drRegular = $('<td>' + nbaSeasons[i].dreb + '</td>')
+		    var orRegular = $('<td>' + nbaSeasons[i].oreb + '</td>')
+		    var rebRegular = $('<td>' + nbaSeasons[i].reb + '</td>')
+		    var stlRegular = $('<td>' + nbaSeasons[i].stl + '</td>')
+		    var foulsRegular = $('<td>' + nbaSeasons[i].pf + '</td>')
+		    var gpRegular = $('<td>' + nbaSeasons[i].gp + '</td>')
+		    var gsRegular = $('<td>' + nbaSeasons[i].gs + '</td>')
+		    var minRegular = $('<td>' + nbaSeasons[i].min + '</td>')
+
+		    regularNBA.append(yearRegular)
+		    regularNBA.append(teamRegular)
+		    regularNBA.append(fgtaRegular)
+		    regularNBA.append(fgtmRegular)
+		    regularNBA.append(fgaRegular)
+		    regularNBA.append(fgmRegular)
+		    regularNBA.append(ftaRegular)
+		    regularNBA.append(ftmRegular)
+		    regularNBA.append(ptsRegular)
+		    regularNBA.append(assistsRegular)
+		    regularNBA.append(blocksRegular)
+		    regularNBA.append(drRegular)
+		    regularNBA.append(orRegular)
+		    regularNBA.append(rebRegular)
+		    regularNBA.append(stlRegular)
+		    regularNBA.append(foulsRegular)
+		    regularNBA.append(gpRegular)
+		    regularNBA.append(gsRegular)
+		    regularNBA.append(minRegular)
+		    regTable.append(regularNBA)	    	
+	    }
+
+	    regTab.append(regTable)
+	    regLi.append(regCol)
+	    regLi.append(regTab)
+
+	    // College Seasons
+	    if(collegeSeasons.length != 0) { 
+		    var collHeaders = $('<tr>')
+		    var collYear = $('<th>Season</th>')
+		    var collTeam = $('<th>Team</th>')
+		    var collFGTA = $('<th>3 Point FG Attempts</th>')
+		    var collFGTM = $('<th>3 Point FG Total</th>')
+		    var collFGA = $('<th>FG Attempts</th>')
+		    var collFGM = $('<th>FG Total</th>')
+		    var collFTA = $('<th>FT Attempts</th>')
+		    var collFTM = $('<th>FT Total</th>')
+		    var collPts = $('<th>Points</th>')
+		    var collAssists = $('<th>Assists</th>')
+		    var collBlocks = $('<th>Blocks</th>')
+		    var collDR = $('<th>Defensive Rebounds</th>')
+		    var collOR = $('<th>Offensive Rebounds</th>')
+		    var collReb = $('<th>Rebounds</th>')
+		    var collStl = $('<th>Steals</th>')
+		    var collFouls = $('<th>Fouls</th>')
+		    var collGP = $('<th>Games Played</th>')
+		    var collGS = $('<th>Games Sat</th>')
+		    var collMin = $('<th>Minutes</th>')
+
+		    collHeaders.append(collYear)
+		    collHeaders.append(collTeam)
+		    collHeaders.append(collFGTA)
+		    collHeaders.append(collFGTM)
+		    collHeaders.append(collFGA)
+		    collHeaders.append(collFGM)
+		    collHeaders.append(collFTA)
+		    collHeaders.append(collFTM)
+		    collHeaders.append(collPts)
+		    collHeaders.append(collAssists)
+		    collHeaders.append(collBlocks)
+		    collHeaders.append(collDR)
+		    collHeaders.append(collOR)
+		    collHeaders.append(collReb)
+		    collHeaders.append(collStl)
+		    collHeaders.append(collFouls)
+		    collHeaders.append(collGP)
+		    collHeaders.append(collGS)
+		    collHeaders.append(collMin)
+		    collTable.append(collHeaders)
+
+		    for(var i = 0; i < collegeSeasons.length; i++) {
+
+			    var regularColl = $('<tr>')
+			    var yearColl = $('<td>' + collegeSeasons[i].season_id + '</td>')
+			    var teamColl = $('<td>' + collegeSeasons[i].school_name + '</td>')
+			    var fgtaColl = $('<td>' + collegeSeasons[i].fg3a + '</td>')
+			    var fgtmColl = $('<td>' + collegeSeasons[i].fg3m + ' (' + Math.round(collegeSeasons[i].fg3_pct * 100) + '%)' + '</td>')
+			    var fgaColl = $('<td>' + collegeSeasons[i].fga + '</td>')
+			    var fgmColl = $('<td>' + collegeSeasons[i].fgm + ' (' + Math.round(collegeSeasons[i].fg_pct * 100) + '%)' + '</td>')
+			    var ftaColl = $('<td>' + collegeSeasons[i].fta + '</td>')
+			    var ftmColl = $('<td>' + collegeSeasons[i].ftm + ' (' + Math.round(collegeSeasons[i].ft_pct * 100) + '%)' + '</td>')
+			    var ptsColl = $('<td>' + collegeSeasons[i].pts + '</td>')
+			    var assistsColl = $('<td>' + collegeSeasons[i].ast + '</td>')
+			    var blocksColl = $('<td>' + collegeSeasons[i].blk + '</td>')
+			    var drColl = $('<td>' + collegeSeasons[i].dreb + '</td>')
+			    var orColl = $('<td>' + collegeSeasons[i].oreb + '</td>')
+			    var rebColl = $('<td>' + collegeSeasons[i].reb + '</td>')
+			    var stlColl = $('<td>' + collegeSeasons[i].stl + '</td>')
+			    var foulsColl = $('<td>' + collegeSeasons[i].pf + '</td>')
+			    var gpColl = $('<td>' + collegeSeasons[i].gp + '</td>')
+			    var gsColl = $('<td>' + collegeSeasons[i].gs + '</td>')
+			    var minColl = $('<td>' + collegeSeasons[i].min + '</td>')
+
+			    regularColl.append(yearColl)
+			    regularColl.append(teamColl)
+			    regularColl.append(fgtaColl)
+			    regularColl.append(fgtmColl)
+			    regularColl.append(fgaColl)
+			    regularColl.append(fgmColl)
+			    regularColl.append(ftaColl)
+			    regularColl.append(ftmColl)
+			    regularColl.append(ptsColl)
+			    regularColl.append(assistsColl)
+			    regularColl.append(blocksColl)
+			    regularColl.append(drColl)
+			    regularColl.append(orColl)
+			    regularColl.append(rebColl)
+			    regularColl.append(stlColl)
+			    regularColl.append(foulsColl)
+			    regularColl.append(gpColl)
+			    regularColl.append(gsColl)
+			    regularColl.append(minColl)
+			    collTable.append(regularColl)	    	
+		    }
+
+			  collTab.append(collTable)
+			  collLi.append(collCol)
+			  collLi.append(collTab)
+			}
+
+	    // Ranking Regular Season 
+
+	    var rankHeaders = $('<tr>')
+	    var rankYear = $('<th>Season</th>')
+	    var rankTeam = $('<th>Team</th>')
+	    var rankFGTA = $('<th>3 Point FG Attempts</th>')
+	    var rankFGTM = $('<th>3 Point FG Total</th>')
+	    var rankFGA = $('<th>FG Attempts</th>')
+	    var rankFGM = $('<th>FG Total</th>')
+	    var rankFTA = $('<th>FT Attempts</th>')
+	    var rankFTM = $('<th>FT Total</th>')
+	    var rankPts = $('<th>Points</th>')
+	    var rankAssists = $('<th>Assists</th>')
+	    var rankBlocks = $('<th>Blocks</th>')
+	    var rankDR = $('<th>Defensive Rebounds</th>')
+	    var rankOR = $('<th>Offensive Rebounds</th>')
+	    var rankReb = $('<th>Rebounds</th>')
+	    var rankStl = $('<th>Steals</th>')
+	    var rankMin = $('<th>Minutes</th>')
+
+	    rankHeaders.append(rankYear)
+	    rankHeaders.append(rankTeam)
+	    rankHeaders.append(rankFGTA)
+	    rankHeaders.append(rankFGTM)
+	    rankHeaders.append(rankFGA)
+	    rankHeaders.append(rankFGM)
+	    rankHeaders.append(rankFTA)
+	    rankHeaders.append(rankFTM)
+	    rankHeaders.append(rankPts)
+	    rankHeaders.append(rankAssists)
+	    rankHeaders.append(rankBlocks)
+	    rankHeaders.append(rankDR)
+	    rankHeaders.append(rankOR)
+	    rankHeaders.append(rankReb)
+	    rankHeaders.append(rankStl)
+	    rankHeaders.append(rankMin)
+	    rankTable.append(rankHeaders)
+
+	    for(var i = 0; i < seasonRank.length; i++) {
+
+		    var rankNBA = $('<tr>')
+		    var yearRank = $('<td>' + seasonRank[i].season_id + '</td>')
+		    var teamRank = $('<td>' + seasonRank[i].team_abbreviation + '</td>')
+		    var fgtaRank = $('<td>' + seasonRank[i].rank_fg3a + '</td>')
+		    var fgtmRank = $('<td>' + seasonRank[i].rank_fg3m + '</td>')
+		    var fgaRank = $('<td>' + seasonRank[i].rank_fga + '</td>')
+		    var fgmRank = $('<td>' + seasonRank[i].rank_fgm + '</td>')
+		    var ftaRank = $('<td>' + seasonRank[i].rank_fta + '</td>')
+		    var ftmRank = $('<td>' + seasonRank[i].rank_ftm + '</td>')
+		    var ptsRank = $('<td>' + seasonRank[i].rank_pts + '</td>')
+		    var assistsRank = $('<td>' + seasonRank[i].rank_ast + '</td>')
+		    var blocksRank = $('<td>' + seasonRank[i].rank_blk + '</td>')
+		    var drRank = $('<td>' + seasonRank[i].rank_dreb + '</td>')
+		    var orRank = $('<td>' + seasonRank[i].rank_oreb + '</td>')
+		    var rebRank = $('<td>' + seasonRank[i].rank_reb + '</td>')
+		    var stlRank = $('<td>' + seasonRank[i].rank_stl + '</td>')
+		    var minRank = $('<td>' + seasonRank[i].rank_min + '</td>')
+
+		    rankNBA.append(yearRank)
+		    rankNBA.append(teamRank)
+		    rankNBA.append(fgtaRank)
+		    rankNBA.append(fgtmRank)
+		    rankNBA.append(fgaRank)
+		    rankNBA.append(fgmRank)
+		    rankNBA.append(ftaRank)
+		    rankNBA.append(ftmRank)
+		    rankNBA.append(ptsRank)
+		    rankNBA.append(assistsRank)
+		    rankNBA.append(blocksRank)
+		    rankNBA.append(drRank)
+		    rankNBA.append(orRank)
+		    rankNBA.append(rebRank)
+		    rankNBA.append(stlRank)
+		    rankNBA.append(minRank)
+		    rankTable.append(rankNBA)	    	
+	    }
+
+	    rankTab.append(rankTable)
+	    rankLi.append(rankCol)
+	    rankLi.append(rankTab)
+
+	    // final product 
+	    $(".statsRows").append(totalsLi)
+	    $(".statsRows").append(regLi)
+	    if(collegeSeasons.length != 0) {
+	    	$(".statsRows").append(collLi)
+	    }
+	    $(".statsRows").append(rankLi)
 
       $('#modalPlayer').modal('open');
     }) 
