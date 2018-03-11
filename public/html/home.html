@@ -13,6 +13,8 @@
   <link href="https://fonts.googleapis.com/css?family=Cantarell:400i|Caveat" rel="stylesheet">
   <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
 </head>
 <body>
 
@@ -21,7 +23,7 @@
       <a href="#" class="brand-logo">
         <table id="navTable">
           <tr>
-            <th><img class='bklyn' src="../images/brooklyn_nets.png"></th>
+            <th><img class='bklyn' src="../images/logos/nets.png"></th>
             <th>Team Builder</th> 
           </tr>
         </table>
@@ -50,6 +52,17 @@
   </div>
   <div id="dashboard" class="col s12">
     
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="modalPlayer" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4 id="modalHeader">Player</h4>
+      <div class="carousel carousel-slider center statCarousel" data-indicators="true"></div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+    </div>
   </div>
 
   <footer class="page-footer" id= "footerContainer">
@@ -81,6 +94,7 @@
   <script src="../js/materialize.js"></script>
   <script src="../js/init.js"></script>
   <script src="../js/home.js"></script>
+  <!-- <script src="../js/view-stats.js"></script> -->
 
   </body>
 </html>

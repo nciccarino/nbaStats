@@ -24,6 +24,7 @@ body {
 .teamsHolder {
 	width: 90%;
 	margin-left: 5%;
+	margin-top: 20px; 
 }
 .teamHeader {
 	color: #ffffff;
@@ -31,15 +32,15 @@ body {
 	font-size: 20px;
 }
 .tri { 
-	padding: 20px;
-	text-align: center;  
 	width: 100px;
+	height: 100px; 
 }
 .tts {
 	padding: 20px;
 	text-align: center;
 	text-transform: uppercase;
 }
+
 .playerName {
 	border-bottom-style: solid;
 	border-bottom-color: #fff;
@@ -49,7 +50,15 @@ body {
 .tableSection {
 	text-align: center; 
 }
-
 #footerContainer {
 	background-color: #828282;
+}
+
+.actionButton {
+	background-color: #333333; 
+	margin-right: 5px; 
+}
+
+.actionButton:hover {
+	background-color: #999999; 
 }

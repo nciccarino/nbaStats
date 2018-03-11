@@ -34,10 +34,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 // Relationships
-db.realteams.belongsTo(db.players);
-db.seasons.belongsTo(db.players);
-db.players.hasMany(db.realteams);  
-db.players.hasMany(db.seasons); 
 db.players.belongsTo(db.teams);
 db.teams.hasMany(db.players);
 db.teams.belongsTo(db.users);
