@@ -15,6 +15,9 @@
 
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
+<!-- Style dependencies. -->
+<link href="https://unpkg.com/selectize@0.12.4/dist/css/selectize.default.css" rel="stylesheet" integrity="sha384-y/lK0mgNA2CldgvjfZFQ7ciSAhXLpIgkl4W/wifJ0EobNX5ac1buhp9X11g7GR2M" crossorigin="anonymous" />
+
 </head>
 <body>
   <!-- Nav -->
@@ -79,6 +82,57 @@
   <div id="modalTeam" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>Create A Team</h4>
+      <!-- Form Start -->
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input placeholder="Team Name Required" id="name" type="text" class="validate" data-length="40">
+              <label for="name">Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="subheading" type="text" class="validate" data-length="60">
+              <label for="subheading">Subheading</label>
+            </div>
+          </div>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="description" class="materialize-textarea"></textarea>
+                  <label for="description">Description</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+               <input type="text" name="deadline" class="datepicker">
+              <label for="deadline">Deadline</label>
+            </div>
+            <div class="file-field input-field col s6">
+              <div class="btn">
+                <span>Logo</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+          </div>        
+          <div class="row">
+            <div class="col s6">
+              <input type="color" name="color" id="colorPick" />
+              <label for="color">Primary Color</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+              <label for="filled-in-box">Active</label>
+            </div>
+          </div>         
+        </form>
+      </div>
+      <!-- Form End -->
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Create</a>
@@ -116,6 +170,7 @@
   <script type="text/javascript" src="../js/materialize.js"></script>
   <script type="text/javascript" src="../js/init.js"></script>
   <script type="text/javascript" src="../js/home.js"></script>
+  <script type="text/javascript" src="../js/my-teams.js"></script>
   <!-- End Scripts -->
   </body>
 </html>

@@ -14,13 +14,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     // User Generated
-    description: DataTypes.TEXT,
-    primaryColor: DataTypes.STRING, 
-    secondaryColor: DataTypes.STRING, 
-    name: {
-      type: DataTypes.STRING,
+    heading: {
+      type: DataTypes.STRING(40),
       allowNull: false
     },
+    subheading: DataTypes.STRING(60), 
+    description: DataTypes.TEXT,
+    primaryColor: DataTypes.STRING, 
+    image: DataTypes.STRING,
+    deadline: DataTypes.DATEONLY, 
+    active: DataTypes.BOOLEAN, 
     // System
     created_at: {
       type: DataTypes.DATE,

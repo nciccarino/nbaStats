@@ -149,3 +149,8 @@ body {
 .btnCreateTeam:hover {
 	background-color: #e2e1e1;
 }
+
+#colorPick {
+	width: 40px;
+	height: 40px; 
+}
