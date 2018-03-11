@@ -17,7 +17,7 @@
 
 </head>
 <body>
-
+  <!-- Nav -->
   <nav class="navWrapper nav-extended">
     <div class="nav-wrapper navHeader">
       <a href="#" class="brand-logo">
@@ -44,18 +44,22 @@
       </ul>
     </div>
   </nav>
+  <!-- End Nav -->
+  <!-- Players -->
   <div id="players" class="col s12">
     <ul class="collapsible popout teamsHolder" data-collapsible="accordion"></ul>
   </div>
+  <!-- End Players -->
+  <!-- Teams -->
   <div id="teams" class="col s12">
     <div class="teamsWrapper">
-      <div class="waves-effect waves-light btn btnCreateTeam">Create Team</div>
+      <div data-target="modalTeam" class="waves-effect waves-light btn modal-trigger btnCreateTeam">Create Team</div>
     </div>
   </div>
-  <div id="dashboard" class="col s12">
-
-  </div>
-
+  <!-- End Teams -->
+  <!-- Dashboard -->
+  <div id="dashboard" class="col s12"></div>
+  <!-- End Dashboard -->
   <!-- Modal Player Stats-->
   <div id="modalPlayer" class="modal bottom-sheet">
     <div class="modal-content">
@@ -67,7 +71,18 @@
     </div>
   </div>
   <!-- End Modal Player Stats -->
-
+  <!-- Modal Create Team -->
+  <div id="modalTeam" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Create A Team</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+    </div>
+  </div>
+  <!-- End Modal Create Team -->
+  <!-- Footer -->
   <footer class="page-footer" id= "footerContainer">
     <div class="container">
       <div class="row">
@@ -78,9 +93,9 @@
         </div>
         <div class="col l4 offset-l2 s12">
           <h3 class="white-text footerTitles">Follow Us On</h3>
-          <!-- <a href="#" target="_blank"><img class="icon-logo" src="images/social/fb.png"></a>
-          <span><a href="#" target="_blank"><img class="icon-logo" src="images/social/ig.png"></a></span>
-          <span><a href="#" target="_blank"><img class="icon-logo" src="images/social/yelp.png"></a></span> -->
+          <a href="https://www.facebook.com/BrooklynNets/" target="_blank" class="socailLinks"><div class="footerLogos" id="facebook"></div></a>
+          <a href="https://www.instagram.com/brooklynnets/" target="_blank" class="socailLinks"><div class="footerLogos" id="instagram"></div></a>
+          <a href="https://twitter.com/BrooklynNets" target="_blank" class="lastSocialLink"><div class="footerLogos" id="twitter"></div></a>
         </div>
       </div>
     </div>
@@ -90,14 +105,12 @@
       </div>
     </div>
   </footer>
-
-
+  <!-- End Footer -->
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="../js/materialize.js"></script>
   <script src="../js/init.js"></script>
   <script src="../js/home.js"></script>
-  <!-- <script src="../js/view-stats.js"></script> -->
-
+  <!-- End Scripts -->
   </body>
 </html>

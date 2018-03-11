@@ -12,6 +12,35 @@ body {
 	border-right-color: #fff;
 	border-right-width: 2px; 
 }
+.footerLogos {
+	width: 75px;
+	height: 75px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.socailLinks { 
+	float: left;
+	position: relative;
+	margin-right: 15px; 
+	border-right-style: solid;
+	border-right-color: #fff;
+	border-right-width: 3px; 
+	padding-right: 15px;
+}
+.lastSocialLink {
+	float: left;
+	position: relative;
+}
+#facebook {
+	background-image: url('../images/social/fb.png')
+}
+#instagram {
+	background-image: url('../images/social/ig.png');
+}
+#twitter {
+	background-image: url('../images/social/tw.png');
+}
 #navTable {
 	margin-bottom: 10px; 
 }
