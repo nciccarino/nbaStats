@@ -38,7 +38,6 @@ module.exports= function(app){
 	})
 
 	app.get('/nba/playerCompare/:arr1/:arr2', function(req, res) {
-		// console.log(req.body.arrlist)
 		nba.stats.playerCompare({
 			PlayerIDList: req.params.arr1,
 			VsPlayerIDList: req.params.arr2

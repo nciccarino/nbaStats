@@ -30,10 +30,10 @@
       </a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#">Sign Out</a></li>
+        <li><a class="waves-effect waves-light btn logoutBtn">Sign Out</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
-        <li><a href="#">Sign Out</a></li>
+        <li><a class="waves-effect waves-light btn logoutBtn">Sign Out</a></li>
       </ul>
     </div>
     <div class="nav-content">
@@ -58,7 +58,11 @@
   </div>
   <!-- End Teams -->
   <!-- Dashboard -->
-  <div id="dashboard" class="col s12"></div>
+  <div id="dashboard" class="col s12">
+    <div class="dashWrapper">
+      
+    </div>
+  </div>
   <!-- End Dashboard -->
   <!-- Modal Player Stats-->
   <div id="modalPlayer" class="modal bottom-sheet">
@@ -75,10 +79,10 @@
   <div id="modalTeam" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>Create A Team</h4>
-      <p>A bunch of text</p>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Create</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
     </div>
   </div>
   <!-- End Modal Create Team -->
@@ -108,9 +112,10 @@
   <!-- End Footer -->
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="../js/materialize.js"></script>
-  <script src="../js/init.js"></script>
-  <script src="../js/home.js"></script>
+  <script type="text/javascript" src="../js/logout.js"></script>
+  <script type="text/javascript" src="../js/materialize.js"></script>
+  <script type="text/javascript" src="../js/init.js"></script>
+  <script type="text/javascript" src="../js/home.js"></script>
   <!-- End Scripts -->
   </body>
 </html>

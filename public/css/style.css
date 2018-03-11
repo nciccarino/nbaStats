@@ -12,6 +12,15 @@ body {
 	border-right-color: #fff;
 	border-right-width: 2px; 
 }
+.logoutBtn {
+	background-color: #cccccc; 
+	margin-right: 10px; 
+}
+
+.logoutBtn:hover {
+	background-color: #636363;
+}
+
 .footerLogos {
 	width: 75px;
 	height: 75px;
@@ -60,11 +69,6 @@ body {
 	background-color: #636363; 
 	font-size: 20px;
 }
-.tri { 
-	width: 100px;
-	height: 100px; 
-}
-
 .tts {
 	padding: 20px;
 	text-align: center;
@@ -130,7 +134,8 @@ body {
 	background-color: #999999; 
 }
 
-.teamsWrapper {
+.teamsWrapper,
+.dashWrapper {
 	min-height: 600px; 
 }
 
