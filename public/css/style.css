@@ -35,6 +35,7 @@ body {
 	width: 100px;
 	height: 100px; 
 }
+
 .tts {
 	padding: 20px;
 	text-align: center;
@@ -98,4 +99,19 @@ body {
 
 .modalClose:hover {
 	background-color: #999999; 
+}
+
+.teamsWrapper {
+	min-height: 600px; 
+}
+
+.btnCreateTeam {
+	background-color: #cccccc; 
+	margin-right: 5px;
+	margin-top: 20px;
+	margin-left: 20px; 
+}
+
+.btnCreateTeam:hover {
+	background-color: #e2e1e1;
 }

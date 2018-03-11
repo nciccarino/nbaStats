@@ -26,7 +26,7 @@ $(document).ready(function() {
 	  		LAL: '../images/logos/lakers.png',
 	  		MEM: '../images/logos/grizzlies.png',
 	  		MIA: '../images/logos/heat.png',
-	  		MIL: '../images/logos/bucks.png',
+	  		MIL: '../images/logos/bucks.svg',
 	  		MIN: '../images/logos/timberwolves.png',
 	  		NOP: '../images/logos/pelicans.png',
 	  		NYK: '../images/logos/knicks.png',
@@ -48,7 +48,8 @@ $(document).ready(function() {
 
 	  		var teamWrapper = $("<li>")
 	  		var teamHeader = $("<div>").addClass("collapsible-header teamHeader " + teams[i].teamId);
-	  		var teamHeaderTri = $("<img src=" + teamLogo[tricode] + " class='tri'>")
+	  		// var teamHeaderTri = $("<img src=" + teamLogo[tricode] + " class='tri'>")
+	  		var teamHeaderTri = $('<div style="background-image: url(' + teamLogo[tricode] + '); width: 100px; height: 100px; background-position: center center; background-repeat: no-repeat; background-size: cover; "></div>')
 	  		var teamHeaderTitle = $("<div class='tts'>" + teams[i].ttsName + "</div>")
 				var teamBody = $("<div id='" + teams[i].teamId + "' style='background-color: " + teams[i].primaryColor +"'>").addClass("collapsible-body row teamSection")
 
