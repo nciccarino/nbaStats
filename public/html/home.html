@@ -15,9 +15,6 @@
 
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
-<!-- Style dependencies. -->
-<link href="https://unpkg.com/selectize@0.12.4/dist/css/selectize.default.css" rel="stylesheet" integrity="sha384-y/lK0mgNA2CldgvjfZFQ7ciSAhXLpIgkl4W/wifJ0EobNX5ac1buhp9X11g7GR2M" crossorigin="anonymous" />
-
 </head>
 <body>
   <!-- Nav -->
@@ -57,6 +54,7 @@
   <div id="teams" class="col s12">
     <div class="teamsWrapper">
       <div data-target="modalTeam" class="waves-effect waves-light btn modal-trigger btnCreateTeam">Create Team</div>
+      <ul class="collapsible popout myTeamsHolder" data-collapsible="accordion"></ul>
     </div>
   </div>
   <!-- End Teams -->
@@ -107,36 +105,36 @@
           </div>
           <div class="row">
             <div class="input-field col s6">
-               <input type="text" name="deadline" class="datepicker">
+               <input type="text" name="deadline" id="deadline" class="datepicker">
               <label for="deadline">Deadline</label>
             </div>
-            <div class="file-field input-field col s6">
-              <div class="btn">
-                <span>Logo</span>
-                <input type="file">
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-              </div>
-            </div>
-          </div>        
-          <div class="row">
             <div class="col s6">
               <input type="color" name="color" id="colorPick" />
               <label for="color">Primary Color</label>
             </div>
-            <div class="input-field col s6">
-              <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-              <label for="filled-in-box">Active</label>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <h5>Select A Logo</h5>
+              <input type="image" class="logoImages" id="logo1" src="../images/logos/nets.png">
+              <input type="image" class="logoImages" id="logo2" src="../images/logos/more/nets2.png">
+              <input type="image" class="logoImages" id="logo3" src="../images/logos/more/nets3.png">
+              <input type="image" class="logoImages" id="logo4" src="../images/logos/more/nets4.png">
+              <input type="image" class="logoImages" id="logo5" src="../images/logos/more/nets5.png">
+              <input type="image" class="logoImages" id="logo6" src="../images/logos/more/nets6.png">
+              <input type="image" class="logoImages" id="logo7" src="../images/logos/more/nets7.png">
+              <input type="image" class="logoImages" id="logo8" src="../images/logos/more/nets8.png">
+              <input type="image" class="logoImages" id="logo9" src="../images/logos/more/nets9.png">
+              <input type="image" class="logoImages" id="logo10" src="../images/logos/more/nets11.png">
             </div>
-          </div>         
+          </div>
         </form>
       </div>
       <!-- Form End -->
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Create</a>
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+      <a href="#!" id="createTeam" class="modal-action modal-close waves-effect waves-green btn-flat">Create</a>
+      <a href="#!" id="cancelBtn" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
     </div>
   </div>
   <!-- End Modal Create Team -->
@@ -169,8 +167,8 @@
   <script type="text/javascript" src="../js/logout.js"></script>
   <script type="text/javascript" src="../js/materialize.js"></script>
   <script type="text/javascript" src="../js/init.js"></script>
-  <script type="text/javascript" src="../js/home.js"></script>
   <script type="text/javascript" src="../js/my-teams.js"></script>
+  <script type="text/javascript" src="../js/home.js"></script>
   <!-- End Scripts -->
   </body>
 </html>

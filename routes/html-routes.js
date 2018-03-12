@@ -29,7 +29,11 @@ module.exports = function(app) {
     // If a user who is not logged in tries to access this route they will be redirected to the signup page
     
     app.get("/home", function(req, res) {
-        res.sendFile(path.join(__dirname, "../public/html/home.html"));
+        if (req.user) {
+            res.sendFile(path.join(__dirname, "../public/html/home.html"));
+        } else {
+            res.redirect("/");
+        }
     });
 
 };

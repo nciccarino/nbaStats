@@ -59,7 +59,8 @@ body {
 .navHeader {
 	margin-bottom: 70px;
 }
-.teamsHolder {
+.teamsHolder,
+.myTeamsHolder {
 	width: 90%;
 	margin-left: 5%;
 	margin-top: 20px; 
@@ -74,7 +75,19 @@ body {
 	text-align: center;
 	text-transform: uppercase;
 }
-
+.myTeam {
+	padding-left: 20px; 
+	padding-top: 20px;
+	padding-bottom: 5px;
+	padding-right: 20px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.subheading,
+.myDeadline {
+	padding-left: 20px;
+	text-align: left;
+}
 .playerName {
 	border-bottom-style: solid;
 	border-bottom-color: #fff;
@@ -143,7 +156,7 @@ body {
 	background-color: #cccccc; 
 	margin-right: 5px;
 	margin-top: 20px;
-	margin-left: 20px; 
+	margin-left: 120px; 
 }
 
 .btnCreateTeam:hover {
@@ -153,4 +166,23 @@ body {
 #colorPick {
 	width: 40px;
 	height: 40px; 
+	border-style: none; 
+}
+
+.logoImages {
+	width: 70px;
+	height: 70px;
+	margin-right: 20px;
+	border-width: 3px;
+	border-style: solid;
+	border-color: #fff;
+	border-radius: 6px; 
+}
+
+.logoImages:hover {
+	border-color: #4aaaa5; 
+}
+.deadline {
+	left: 60%;
+	position: relative;
 }

@@ -211,7 +211,6 @@ $(document).ready(function() {
 
 		$(".statsRows").html("");
 
-		console.log(this)
 		var thisPlayer = this;
 		var thePlayer = thisPlayer.getAttribute("data-person");
     var playerfirst = thisPlayer.getAttribute("data-namefirst")

@@ -5,18 +5,10 @@ module.exports= function(app){
 
 //PASSPORT ROUTES
 
- // Using the passport.authenticate middleware with our local strategy.
-  // If the user has valid login credentials, send them to the members page.
-  // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-    // So we're sending the user back the route to the members page because the redirect will happen on the front end
-    // They won't get this or even be able to access this page if they aren't authed
     res.json("/home");
   });
-  // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
-  // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
-  // otherwise send back an error
+
   app.post("/api/signup", function(req, res) {
     console.log(req.body);
     db.users.create({
@@ -27,7 +19,6 @@ module.exports= function(app){
     }).catch(function(err) {
 
       console.log("ERROR: " + err)
-      // res.status(422).json(err.errors[0].message);
     });
   });
 
@@ -53,5 +44,85 @@ module.exports= function(app){
     }
   });
 
+  app.post("/api/teams", function(req, res) {
+    db.teams.create({
+      user_id: req.body.user_id,
+      name: req.body.name,
+      subheading: req.body.subheading,
+      description: req.body.description,
+      primaryColor: req.body.primaryColor,
+      image: req.body.image,  
+      deadline: req.body.deadline,
+      active: req.body.active
+    }).then(function(data) {
+      res.json(data)
+    }).catch(function(err) {
+      console.log(err)
+    })
+  })
+
+  app.get('/allInfo/:id', (req, res) => {  
+      db.users.findAll({
+        where: {
+          id: req.params.id
+        },
+        include: [
+          {
+            model: db.teams,
+            include: [
+              {
+                model: db.players
+              }
+            ]
+          }
+        ]
+      }).then(users => {
+        const resObj = users.map(user => {
+
+          //tidy up the user data
+          return Object.assign(
+            {},
+            {
+              user_id: user.id,
+              email: user.email,
+              role: user.role,
+              teams: user.teams.map(team => {
+
+                //tidy up the post data
+                return Object.assign(
+                  {},
+                  {
+                    team_id: team.id,
+                    user_id: team.user_id,
+                    name: team.name,
+                    subheading: team.subheading,
+                    description: team.description,
+                    primaryColor: team.primaryColor,
+                    image: team.image, 
+                    deadline: team.deadline, 
+                    active: team.active,
+                    players: team.players.map(Player => {
+
+                      //tidy up the comment data
+                      return Object.assign(
+                        {},
+                        {
+                          player_id: player.id,
+                          team_id: player.team_id,
+                          description: player.description,
+                          status: player.status,
+                          person: player.person
+                        }
+                      )
+                    })
+                  }
+                  )
+              })
+            }
+          )
+        });
+        res.json(resObj)
+      });
+    });
 
 }//end module.exports
