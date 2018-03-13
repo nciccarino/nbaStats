@@ -2,7 +2,13 @@ $(document).ready(function() {
 
 	var userSelect;
 	var trueDate; 
+	var addDropdown; 
 	var src = "../images/logos/nets.png"; 
+
+	// $('.draftBtn').on("click", function() {
+	// 	console.log("hit")
+	// 	$(this).append(addDropdown)
+	// })
 
 	$('#createTeam').on('click', handleAdd)
 
@@ -23,6 +29,18 @@ $(document).ready(function() {
   	src = $(image).attr("src")
   }
 
+	function formatDate() {
+	    var d = new Date(),
+	        month = '' + (d.getMonth() + 1),
+	        day = '' + d.getDate(),
+	        year = d.getFullYear();
+
+	    if (month.length < 2) month = '0' + month;
+	    if (day.length < 2) day = '0' + day;
+
+	    return [year, month, day].join('-');
+	}
+
   function allInfo() {
 		$.ajax({
 			type: 'GET',
@@ -32,9 +50,15 @@ $(document).ready(function() {
 
 			var teams = data[0].teams 
 
+			addDropdown = $("<ul id='dropdown1' class='dropdown-content addList'></ul>")
+
 	  	for(var i = 0; i < teams.length; i++) {
 
+	  		var teamOption = $('<li><a data-team=' + teams[i].team_id + ' href="#!">' + teams[i].name + '</a></li>')
+	  		addDropdown.append(teamOption)
+
 	  		var myDeadline = moment(teams[i].deadline).format('ll'); 
+	  		var newDate = formatDate()
 
 	  		var teamWrapper = $("<li>")
 	  		var teamHeader = $("<div>").addClass("collapsible-header teamHeader " + teams[i].team_id);
@@ -44,7 +68,21 @@ $(document).ready(function() {
 	  		var teamHeaderSub = $("<li class='subheading'>" + teams[i].subheading + "</li>")
 	  		//var teamHeaderDeadline = $("<li class='myDeadline'>" + myDeadline + "</li>")
 				var teamBody = $("<div id='" + teams[i].team_id + "' style='background-color: " + teams[i].primaryColor +"'>").addClass("collapsible-body row teamSection")
+				var teamEdit = $('<a data-team=' + teams[i].team_id + ' class="waves-effect waves-light btn editTeam">Edit Team</a>')
+				var infoWrapper = $("<div>").addClass("infoWrapper")
+				var infoBody = $("<div class='description'>" + teams[i].description + "</div>")
+				var infoDeadline; 
+				if(teams[i].deadline > newDate) {
+					infoDeadline = $("<div class='deadline green'>" + myDeadline + "</div>")
+				}
+				if(teams[i].deadline <= newDate) {
+					infoDeadline = $("<div class='deadline red'>" + myDeadline + "</div>")
+				}
 
+				infoWrapper.append(infoBody)
+				infoWrapper.append(infoDeadline)
+				teamBody.append(teamEdit)
+				teamBody.append(infoWrapper)
 				teamHeaderHolder.append(teamHeaderTitle)
 				if (teams[i].subheading != '') {
 					teamHeaderHolder.append(teamHeaderSub)

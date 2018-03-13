@@ -186,8 +186,10 @@ $(document).ready(function() {
 
 	  		var cardAction = $("<div>").addClass("card-action")
 	  		var statsAction = $("<a data-person=" + players[i].personId + " data-jersey=" + players[i].jersey + " data-namefirst=" + players[i].firstName + " data-namelast=" + players[i].lastName + " class='waves-effect waves-light btn actionButton'>View Stats</a>")
-	  		var addAction = $("<a id='" + players[i].personId + "' class='waves-effect waves-light btn actionButton'>Draft</a>")
+	  		var addAction = $("<a data-person=" + players[i].personId + " data-jersey=" + players[i].jersey + " data-namefirst=" + players[i].firstName + " data-namelast=" + players[i].lastName + " data-pos=" + players[i].pos + " class='waves-effect waves-light dropdown-button btn draftBtn' data-activates='dropdown1'>Draft</a>")
+	  		// var addDropdown = $("<ul id='dropdown1' class='dropdown-content addList'></ul>")
 
+	  		// addAction.append(addDropdown)
 	  		cardAction.append(statsAction)
 	  		cardAction.append(addAction)
 	  		cardContent.append(cardTitle)
