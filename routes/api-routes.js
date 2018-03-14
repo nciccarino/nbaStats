@@ -115,7 +115,7 @@ module.exports= function(app){
                     image: team.image, 
                     deadline: team.deadline, 
                     active: team.active,
-                    players: team.players.map(Player => {
+                    players: team.players.map(player => {
 
                       //tidy up the comment data
                       return Object.assign(
@@ -123,9 +123,10 @@ module.exports= function(app){
                         {
                           player_id: player.id,
                           team_id: player.team_id,
-                          description: player.description,
-                          status: player.status,
-                          person: player.person
+                          person_id: player.person_id,
+                          name: player.name,
+                          jersey: player.jersey,
+                          position: player.position
                         }
                       )
                     })
