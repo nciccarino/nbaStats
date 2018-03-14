@@ -2,15 +2,16 @@ $(document).ready(function() {
 
 	var userSelect;
 	var trueDate; 
-	var addDropdown; 
 	var src = "../images/logos/nets.png"; 
+	var theImage; 
+	var hit = false; 
+	var addArr = [];
 
-	// $('.draftBtn').on("click", function() {
-	// 	console.log("hit")
-	// 	$(this).append(addDropdown)
-	// })
-
+	$(document.body).on("click", '.draftBtn', addPlayer);
 	$('#createTeam').on('click', handleAdd)
+	$('.logoImages').on('click', getImage)
+	$(document.body).on("click", '.logoImagesForm', getImageTeam);
+	$(document.body).on("click", '#createPlayer', wasHit);
 
   function getEmail() {
     $.get("/api/user_data").then(function(data){
@@ -22,11 +23,16 @@ $(document).ready(function() {
     })
   }
 
-  $('.logoImages').on('click', getImage)
-
   function getImage() {
   	var image = this;
   	src = $(image).attr("src")
+  }
+
+  function getImageTeam() {
+  	hit = true; 
+  	console.log("getImageTeam")
+  	var teamImage = this;
+  	theImage = teamImage.getAttribute("data-team"); 
   }
 
 	function formatDate() {
@@ -50,12 +56,14 @@ $(document).ready(function() {
 
 			var teams = data[0].teams 
 
-			addDropdown = $("<ul id='dropdown1' class='dropdown-content addList'></ul>")
+			var addForm = $('<div>')
+			var addRow = $('<div class="row">')
+			var addCol = $('<div class="input-field teamInput col s12">')
 
 	  	for(var i = 0; i < teams.length; i++) {
 
-	  		var teamOption = $('<li><a data-team=' + teams[i].team_id + ' href="#!">' + teams[i].name + '</a></li>')
-	  		addDropdown.append(teamOption)
+	  		var teamOption = $('<div class="imgGrid"><input type="image" src="' + teams[i].image + '" data-team=' + teams[i].team_id + ' href="#" class="logoImagesForm"><div class="teamLabel">' + teams[i].name + '</div></div>')
+	  		addCol.append(teamOption)
 
 	  		var myDeadline = moment(teams[i].deadline).format('ll'); 
 	  		var newDate = formatDate()
@@ -93,7 +101,10 @@ $(document).ready(function() {
 	  		teamWrapper.append(teamBody);
 	  		$(".myTeamsHolder").append(teamWrapper);
 	  	}
-		})
+	  	addRow.append(addCol)
+  		addForm.append(addRow)
+  		$(".addModalPlayer").append(addForm)
+		}) 
   }
 
   function testDates() {
@@ -171,9 +182,7 @@ $(document).ready(function() {
   		deadline: deadline,
   		active: 1
   	}
-
   	submitTeam(newTeam)
-
   }
 
   function submitTeam(Team) {
@@ -185,6 +194,65 @@ $(document).ready(function() {
 			console.log("posted data");	
 			window.location.href = "/home";
 		})
+  }
+
+  function wasHit() {
+  	if(theImage != null) {
+  		playerSubmit()
+  	}
+  	if(theImage == null) {
+  		alert("Please Select A Team")
+  		return; 
+  	}
+  }
+
+  function addPlayer() {
+  	console.log("addPlayer")
+  	theImage = null; 
+  	$('#modalAddPlayer').modal('open');
+		var thisPlayer = this;
+		var thePlayer = thisPlayer.getAttribute("data-person");
+    var playerfirst = thisPlayer.getAttribute("data-namefirst")
+    var playerlast = thisPlayer.getAttribute("data-namelast")
+    var playerJersey = thisPlayer.getAttribute("data-jersey")
+    var playerPos	= thisPlayer.getAttribute("data-pos"); 
+    var playerName = playerfirst + " " + playerlast; 
+ 		
+ 		addArr = []
+    addArr.push(thePlayer)
+    addArr.push(playerName)
+    addArr.push(playerJersey)
+    addArr.push(playerPos)
+  }
+
+  function playerSubmit() {
+  	console.log("playerSubmit")
+  	console.log(addArr)
+  	console.log(theImage)
+
+  	var theId = addArr[0]
+  	var theName = addArr[1]
+  	var theJersey = addArr[2]
+  	var thePos = addArr[3]
+  	var theTeam = theImage
+
+  	var newPlayer = {
+  		team_id: theTeam,
+  		person_id: theId,
+  		name: theName,
+  		jersey: theJersey,
+  		position: thePos
+  	}
+
+		$.ajax({
+			type: 'POST',
+			url:'/api/newplayer',
+			data: newPlayer
+		}).done(function(){
+			console.log("posted data");	
+			window.location.href = "/home";
+		})
+
   }
 
   getEmail();

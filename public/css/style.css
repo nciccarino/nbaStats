@@ -182,9 +182,21 @@ body {
 	border-radius: 6px; 
 }
 
-.logoImages:hover {
+.logoImages:hover,
+.logoImagesForm:hover {
 	border-color: #4aaaa5; 
 }
+
+.logoImagesForm {
+	width: 150px;
+	height: 150px;
+	margin-right: 20px;
+	border-width: 3px;
+	border-style: solid;
+	border-color: #fff;
+	border-radius: 6px; 
+}
+
 .infoWrapper {
 	color: #000;
 	width: 100%;
@@ -215,4 +227,13 @@ body {
 .editTeam {
 	background-color: #333333; 
 	margin-bottom: 20px; 
+}
+
+.teamLabel {
+	margin-top: 5px;
+}
+
+.imgGrid {
+	margin-right: 20px;
+	float: left;
 }

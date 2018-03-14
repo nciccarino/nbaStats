@@ -61,6 +61,20 @@ module.exports= function(app){
     })
   })
 
+  app.post("/api/newplayer", function(req, res) {
+    db.players.create({
+      team_id: req.body.team_id,
+      person_id: req.body.person_id,
+      name: req.body.name,
+      jersey: req.body.jersey,
+      position: req.body.position
+    }).then(function(data) {
+      res.json(data)
+    }).catch(function(err) {
+      console.log(err)
+    })
+  })
+
   app.get('/allInfo/:id', (req, res) => {  
       db.users.findAll({
         where: {
