@@ -12,6 +12,8 @@ $(document).ready(function() {
 	$('.logoImages').on('click', getImage)
 	$(document.body).on("click", '.logoImagesForm', getImageTeam);
 	$(document.body).on("click", '#createPlayer', wasHit);
+	$(document.body).on("click", '.removeBtn', removeToast); 
+	$(document.body).on("click", '.cutPlayer', cutPlayer);
 
   function getEmail() {
     $.get("/api/user_data").then(function(data){
@@ -72,9 +74,9 @@ $(document).ready(function() {
 	  		var teamHeader = $("<div>").addClass("collapsible-header teamHeader " + teams[i].team_id);
 	  		var teamHeaderTri = $('<div style="background-image: url(' + teams[i].image + '); width: 100px; height: 100px; background-position: center center; background-repeat: no-repeat; background-size: cover; "></div>')
 	  		var teamHeaderHolder = $("<ul>")
-	  		var teamHeaderTitle = $("<li class='myTeam'>" + teams[i].name + "</li>")
+	  		var teamHeaderTitle = $("<li class='myTeam'>" + teams[i].name + " (" + teams[i].players.length + ")</li>")
 	  		var teamHeaderSub = $("<li class='subheading'>" + teams[i].subheading + "</li>")
-	  		//var teamHeaderDeadline = $("<li class='myDeadline'>" + myDeadline + "</li>")
+
 				var teamBody = $("<div id='" + teams[i].team_id + "' style='background-color: " + teams[i].primaryColor +"'>").addClass("collapsible-body row teamSection")
 				var teamEdit = $('<a data-team=' + teams[i].team_id + ' class="waves-effect waves-light btn editTeam">Edit Team</a>')
 				var infoWrapper = $("<div>").addClass("infoWrapper")
@@ -100,6 +102,37 @@ $(document).ready(function() {
 	  		teamWrapper.append(teamHeader);
 	  		teamWrapper.append(teamBody);
 	  		$(".myTeamsHolder").append(teamWrapper);
+
+				var players = teams[i].players
+
+				for(var j = 0; j < players.length; j++) {
+
+		  		var card = $("<div id='" + players[j].person_id + "'>").addClass("playerCards")
+		  		var col = $("<div>").addClass("col s4 m3")
+		  		var cardClass = $("<div>").addClass("card blue-grey darken-1") 
+
+		  		var cardContent = $("<div>").addClass("card-content white-text")
+		  		var	cardTitle = $("<span>#" + players[j].jersey + " - " + players[j].name + " (" + players[j].position + ")</span>").addClass("card-title playerName") 
+
+		  		var cardAction = $("<div>").addClass("card-action playerActions")
+		  		var statsAction = $("<a data-drafted=" + 1 + " data-person=" + players[j].person_id + " data-jersey=" + players[j].jersey + " data-name=" + players[j].name + " data-pos=" + players[j].position + " class='waves-effect waves-light btn actionButton'>View Stats</a>")
+		  		var removeAction = $("<a data-person=" + players[j].player_id + " data-name=" + players[j].name + " data-team=" + players[j].team_id + " class='waves-effect waves-light btn removeBtn'>Cut Player</a>")
+
+		  		cardAction.append(statsAction)
+		  		cardAction.append(removeAction)
+		  		cardContent.append(cardTitle)
+		  		cardClass.append(cardContent)
+		  		cardClass.append(cardAction)
+		  		col.append(cardClass)
+		  		card.append(col)
+
+		  		var section = document.getElementById(players[j].team_id); 
+
+		  		var idSection = $(section).attr("id")
+		  		if(idSection == players[j].team_id) {
+		  			$(section).append(card)
+		  		}
+				}
 	  	}
 	  	addRow.append(addCol)
   		addForm.append(addRow)
@@ -192,7 +225,14 @@ $(document).ready(function() {
 			data: Team
 		}).done(function(){
 			console.log("posted data");	
-			window.location.href = "/home";
+			$(".myTeamsHolder").html("")
+			$(".addModalPlayer").html("")
+			$('#name').val("")
+			$('#subheading').val("")
+			$('#description').val("")
+			$('#colorPick').val("")
+			trueDate = ''
+			getEmail()
 		})
   }
 
@@ -250,8 +290,53 @@ $(document).ready(function() {
 			data: newPlayer
 		}).done(function(){
 			console.log("posted data");	
-			window.location.href = "/home";
+			$(".myTeamsHolder").html("")
+			$(".addModalPlayer").html("")
+			theImage = null
+			Materialize.toast(theName + ' Added', 6000)
+			getEmail()
 		})
+
+  }
+
+  function removeToast() {
+  	console.log("hit toast")
+  	console.log(this)
+  	var removeP = this;
+  	var pID = removeP.getAttribute("data-person")
+  	var pTeam = removeP.getAttribute("data-team")
+  	var pName = removeP.getAttribute("data-name") 
+  	var $toastContent = $('<span>Are you sure that you want to cut ' + pName + ' ?</span>').add($('<button data-team=' + pTeam + ' data-id=' + pID + ' class="btn-flat toast-action cutPlayer">Yes, part ways.</button>'));
+  	Materialize.toast($toastContent, 10000);
+  }
+
+  function cutPlayer() {
+  	var freeAgent = this;
+  	var agentId = freeAgent.getAttribute("data-id")
+  	var agentTeam = freeAgent.getAttribute("data-team")
+
+  	var playerObj = {
+  		id: agentId,
+  		team_id: agentTeam
+  	}
+
+  	$.ajax({
+      method: "DELETE",
+      url: "/player/delete",
+      data: playerObj
+    })
+    .done(function() {
+    	Materialize.Toast.removeAll();
+      console.log("Player Deleted")
+			$(".myTeamsHolder").html("")
+			$(".addModalPlayer").html("")
+			$('#name').val("")
+			$('#subheading').val("")
+			$('#description').val("")
+			$('#colorPick').val("")
+			trueDate = ''
+			getEmail()
+    });
 
   }
 

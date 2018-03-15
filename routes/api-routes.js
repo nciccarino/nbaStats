@@ -75,6 +75,17 @@ module.exports= function(app){
     })
   })
 
+  app.delete("/player/delete", function(req, res) {
+    db.players.destroy({
+      where: {
+        id: req.body.id,
+        team_id: req.body.team_id
+      }
+    }).then(function(data) {
+      res.json(data);
+    });
+  });
+
   app.get('/allInfo/:id', (req, res) => {  
       db.users.findAll({
         where: {

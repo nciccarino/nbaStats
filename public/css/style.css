@@ -80,7 +80,7 @@ body {
 	padding-top: 20px;
 	padding-bottom: 5px;
 	padding-right: 20px;
-	text-align: center;
+	text-align: left;
 	text-transform: uppercase;
 }
 .subheading,
@@ -102,14 +102,16 @@ body {
 }
 
 .actionButton,
-.draftBtn {
+.draftBtn,
+.removeBtn {
 	background-color: #333333; 
 	margin-right: 5px; 
 }
 
 .actionButton:hover,
 .editTeam:hover,
-.draftBtn:hover {
+.draftBtn:hover,
+.removeBtn:hover {
 	background-color: #999999; 
 }
 
@@ -206,6 +208,7 @@ body {
 	border-radius: 6px; 
 	line-height: 1.6;
 	font-size: 20px; 
+	margin-bottom: 20px; 
 }
 .deadline {
 	margin-top: 10px; 

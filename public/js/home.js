@@ -185,7 +185,7 @@ $(document).ready(function() {
 	  		playerTable.append(weightSection)
 
 	  		var cardAction = $("<div>").addClass("card-action playerActions")
-	  		var statsAction = $("<a data-person=" + players[i].personId + " data-jersey=" + players[i].jersey + " data-namefirst=" + players[i].firstName + " data-namelast=" + players[i].lastName + " class='waves-effect waves-light btn actionButton'>View Stats</a>")
+	  		var statsAction = $("<a data-drafted=" + 0 + " data-person=" + players[i].personId + " data-jersey=" + players[i].jersey + " data-namefirst=" + players[i].firstName + " data-namelast=" + players[i].lastName + " class='waves-effect waves-light btn actionButton'>View Stats</a>")
 	  		var addAction = $("<a data-person=" + players[i].personId + " data-jersey=" + players[i].jersey + " data-namefirst=" + players[i].firstName + " data-namelast=" + players[i].lastName + " data-pos=" + players[i].pos + " class='draftBtn waves-effect waves-light btn'>Draft</a>")
 
 	  		cardAction.append(statsAction)
@@ -213,11 +213,21 @@ $(document).ready(function() {
 
 		var thisPlayer = this;
 		var thePlayer = thisPlayer.getAttribute("data-person");
-    var playerfirst = thisPlayer.getAttribute("data-namefirst")
-    var playerlast = thisPlayer.getAttribute("data-namelast")
-    var playerJersey = thisPlayer.getAttribute("data-jersey")
-    var playerInfo = "#" + playerJersey + " - " + playerfirst + " " + playerlast
-    document.getElementById('modalHeader').innerHTML = playerInfo
+		var playerJersey = thisPlayer.getAttribute("data-jersey")
+		var playerInfo; 
+
+		if(thisPlayer.getAttribute("data-drafted") == 0) {
+	    var playerfirst = thisPlayer.getAttribute("data-namefirst")
+	    var playerlast = thisPlayer.getAttribute("data-namelast")
+	    playerInfo = "#" + playerJersey + " - " + playerfirst + " " + playerlast
+	    document.getElementById('modalHeader').innerHTML = playerInfo
+		} else if(thisPlayer.getAttribute("data-drafted") == 1) {
+    	var playerFull = thisPlayer.getAttribute("data-name")
+    	var playerPos = thisPlayer.getAttribute("data-pos")
+    	playerInfo = "#" + playerJersey + " - " + playerFull + " (" + playerPos + ")"
+      document.getElementById('modalHeader').innerHTML = playerInfo
+    }
+    
     $.ajax({
       method: 'GET',
       url: '/nba/stats/' + thePlayer
