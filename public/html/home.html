@@ -138,6 +138,69 @@
     </div>
   </div>
   <!-- End Modal Create Team -->
+  <!-- Modal Update Team -->
+  <div id="modalEditTeam" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Update Team</h4>
+      <!-- Form Start -->
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input placeholder="Team Name Required" id="nameEdit" type="text" class="validate" data-length="40">
+              <label for="nameEdit">Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="subheadingEdit" type="text" class="validate" data-length="60">
+              <label for="subheadingEdit">Subheading</label>
+            </div>
+          </div>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="descriptionEdit" class="materialize-textarea"></textarea>
+                  <label for="descriptionEdit">Description</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+               <input type="text" name="deadlineEdit" id="deadlineEdit" class="datepicker">
+              <label for="deadlineEdit">Deadline</label>
+            </div>
+            <div class="col s6">
+              <input type="color" name="colorEdit" id="colorPickEdit" />
+              <label for="colorEdit">Primary Color</label>
+            </div>
+          </div>
+          <a class="waves-effect waves-light btn newLogoBtn">New Logo?</a>
+          <div class="row newLogo">
+            <div class="input-field col s12">
+              <h5>Select A Logo</h5>
+              <input type="image" class="logoImages" id="logo1" src="../images/logos/nets.png">
+              <input type="image" class="logoImages" id="logo2" src="../images/logos/more/nets2.png">
+              <input type="image" class="logoImages" id="logo3" src="../images/logos/more/nets3.png">
+              <input type="image" class="logoImages" id="logo4" src="../images/logos/more/nets4.png">
+              <input type="image" class="logoImages" id="logo5" src="../images/logos/more/nets5.png">
+              <input type="image" class="logoImages" id="logo6" src="../images/logos/more/nets6.png">
+              <input type="image" class="logoImages" id="logo7" src="../images/logos/more/nets7.png">
+              <input type="image" class="logoImages" id="logo8" src="../images/logos/more/nets8.png">
+              <input type="image" class="logoImages" id="logo10" src="../images/logos/more/nets11.png">
+              <input type="image" class="logoImages" id="logo11" src="../images/logos/nba.png">
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Form End -->
+    </div>
+    <div class="modal-footer">
+      <a href="#!" id="updateTeam" class="modal-action modal-close waves-effect waves-green btn-flat">Update</a>
+      <a href="#!" id="cancelBtn" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+    </div>
+  </div>
+  <!-- End Modal Create Team -->
   <!-- Modal Add Player -->
   <div id="modalAddPlayer" class="modal">
     <div class="modal-content addModalPlayer">

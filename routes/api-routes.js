@@ -86,6 +86,16 @@ module.exports= function(app){
     });
   });
 
+  app.get("/teamInfo/:theteamid", (req, res) => {
+    db.teams.findAll({
+      where: { 
+        req.params.theteamid
+      }
+    }).then(function(data) {
+      res.json(data); 
+    });
+  });
+
   app.get('/allInfo/:id', (req, res) => {  
       db.users.findAll({
         where: {

@@ -14,6 +14,11 @@ $(document).ready(function() {
 	$(document.body).on("click", '#createPlayer', wasHit);
 	$(document.body).on("click", '.removeBtn', removeToast); 
 	$(document.body).on("click", '.cutPlayer', cutPlayer);
+	$(document.body).on("click", '.editTeam', showEdit);
+
+	$(".newLogoBtn").click(function(){
+	    $(".newLogo").toggle();
+	});
 
   function getEmail() {
     $.get("/api/user_data").then(function(data){
@@ -78,7 +83,7 @@ $(document).ready(function() {
 	  		var teamHeaderSub = $("<li class='subheading'>" + teams[i].subheading + "</li>")
 
 				var teamBody = $("<div id='" + teams[i].team_id + "' style='background-color: " + teams[i].primaryColor +"'>").addClass("collapsible-body row teamSection")
-				var teamEdit = $('<a data-team=' + teams[i].team_id + ' class="waves-effect waves-light btn editTeam">Edit Team</a>')
+				var teamEdit = $('<a data-team=' + teams[i].team_id + ' class="waves-effect waves-light btn editTeam">Update Team</a>')
 				var infoWrapper = $("<div>").addClass("infoWrapper")
 				var infoBody = $("<div class='description'>" + teams[i].description + "</div>")
 				var infoDeadline; 
@@ -108,7 +113,7 @@ $(document).ready(function() {
 				for(var j = 0; j < players.length; j++) {
 
 		  		var card = $("<div id='" + players[j].person_id + "'>").addClass("playerCards")
-		  		var col = $("<div>").addClass("col s4 m3")
+		  		var col = $("<div>").addClass("col s6 m4")
 		  		var cardClass = $("<div>").addClass("card blue-grey darken-1") 
 
 		  		var cardContent = $("<div>").addClass("card-content white-text")
@@ -338,6 +343,64 @@ $(document).ready(function() {
 			getEmail()
     });
 
+  }
+
+  function showEdit() {
+
+  	var thisTeam = this; 
+  	var theTeamId = this.getAttribute("data-team")
+
+		$.ajax({
+			type: 'GET',
+			url:'/teamInfo/' + theTeamId
+		}).done(function(data){
+			console.log(data)
+			
+		})
+
+  	$('#modalEditTeam').modal('open');
+  }
+
+  function editTeam() {
+  	var userid = userSelect; 
+  	var nameEdit = $('#nameEdit').val().trim()
+  	var subheadingEdit = $('#subheadingEdit').val().trim()
+  	var descriptionEdit = $('#descriptionEdit').val().trim()
+
+  	testDates()
+  	var deadlineEdit = trueDate
+
+  	var primaryColorEdit = $('#colorPickEdit').val()
+
+  	var newTeam = {
+  		user_id: userSelect,
+  		name: nameEdit,
+  		subheading: subheadingEdit,
+  		description: descriptionEdit,
+  		primaryColor: primaryColorEdit,
+  		image: src, 
+  		deadline: deadlineEdit,
+  		active: 1
+  	}
+  	submitTeam(newTeam)
+  }
+
+  function submitTeam(Team) {
+		$.ajax({
+			type: 'POST',
+			url:'/api/teams',
+			data: Team
+		}).done(function(){
+			console.log("posted data");	
+			$(".myTeamsHolder").html("")
+			$(".addModalPlayer").html("")
+			$('#name').val("")
+			$('#subheading').val("")
+			$('#description').val("")
+			$('#colorPick').val("")
+			trueDate = ''
+			getEmail()
+		})
   }
 
   getEmail();

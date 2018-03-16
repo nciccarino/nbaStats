@@ -103,7 +103,8 @@ body {
 
 .actionButton,
 .draftBtn,
-.removeBtn {
+.removeBtn,
+.newLogoBtn {
 	background-color: #333333; 
 	margin-right: 5px; 
 }
@@ -111,7 +112,8 @@ body {
 .actionButton:hover,
 .editTeam:hover,
 .draftBtn:hover,
-.removeBtn:hover {
+.removeBtn:hover,
+.newLogoBtn:hover {
 	background-color: #999999; 
 }
 
@@ -239,4 +241,8 @@ body {
 .imgGrid {
 	margin-right: 20px;
 	float: left;
+}
+
+.newLogo {
+	display: none; 
 }
