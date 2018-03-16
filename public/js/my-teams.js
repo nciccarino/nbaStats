@@ -6,6 +6,7 @@ $(document).ready(function() {
 	var theImage; 
 	var hit = false; 
 	var addArr = [];
+	var updateId; 
 
 	$(document.body).on("click", '.draftBtn', addPlayer);
 	$('#createTeam').on('click', handleAdd)
@@ -15,6 +16,8 @@ $(document).ready(function() {
 	$(document.body).on("click", '.removeBtn', removeToast); 
 	$(document.body).on("click", '.cutPlayer', cutPlayer);
 	$(document.body).on("click", '.editTeam', showEdit);
+	$('#updateTeam').on('click', handleUpdate)
+	$(document.body).on("click", '#deleteTeamBtn', deleteTeam);
 
 	$(".newLogoBtn").click(function(){
 	    $(".newLogo").toggle();
@@ -145,8 +148,8 @@ $(document).ready(function() {
 		}) 
   }
 
-  function testDates() {
-  	var deadline = $('#deadline').val()
+  function testDates(deadline) {
+  	// var deadline = $('#deadline').val()
   	console.log(deadline)
 		var str = deadline.replace(",", "");
 		console.log(str)
@@ -205,7 +208,8 @@ $(document).ready(function() {
   	var subheading = $('#subheading').val().trim()
   	var description = $('#description').val().trim()
 
-  	testDates()
+  	var thisDeadline = $('#deadline').val()
+  	testDates(thisDeadline)
   	var deadline = trueDate
 
   	var primaryColor = $('#colorPick').val()
@@ -347,6 +351,7 @@ $(document).ready(function() {
 
   function showEdit() {
 
+  	updateId = this.getAttribute("data-team")
   	var thisTeam = this; 
   	var theTeamId = this.getAttribute("data-team")
 
@@ -355,43 +360,84 @@ $(document).ready(function() {
 			url:'/teamInfo/' + theTeamId
 		}).done(function(data){
 			console.log(data)
-			
+	  	var nameThisEdit = $('#nameEdit').val('' + data[0].name + '')
+	  	var subheadingThisEdit = $('#subheadingEdit').val('' + data[0].subheading + '')
+	  	var descriptionThisEdit = $('#descriptionEdit').val('' + data[0].description + '')
+	  	var primaryColorThisEdit = $('#colorPickEdit').val('' + data[0].primaryColor + '')
+	  	src = data[0].image;
 		})
-
+		$("#deleteTeamBtn").attr("data-team", updateId)
   	$('#modalEditTeam').modal('open');
   }
 
-  function editTeam() {
+  function handleUpdate() {
   	var userid = userSelect; 
+  	var teamUpdate = updateId
   	var nameEdit = $('#nameEdit').val().trim()
   	var subheadingEdit = $('#subheadingEdit').val().trim()
   	var descriptionEdit = $('#descriptionEdit').val().trim()
 
-  	testDates()
+  	var deadline = $('#deadlineEdit').val()
+  	testDates(deadline)
   	var deadlineEdit = trueDate
 
   	var primaryColorEdit = $('#colorPickEdit').val()
 
-  	var newTeam = {
-  		user_id: userSelect,
+  	var newUpdate = {
+  		id: teamUpdate,
+  		user_id: userid, 
   		name: nameEdit,
   		subheading: subheadingEdit,
   		description: descriptionEdit,
   		primaryColor: primaryColorEdit,
   		image: src, 
-  		deadline: deadlineEdit,
-  		active: 1
+  		deadline: deadlineEdit
   	}
-  	submitTeam(newTeam)
+  	updateTeam(newUpdate)
   }
 
-  function submitTeam(Team) {
+  function updateTeam(newUpdate) {
 		$.ajax({
-			type: 'POST',
+			type: 'PUT',
 			url:'/api/teams',
-			data: Team
-		}).done(function(){
-			console.log("posted data");	
+			data: newUpdate
+		}).done(function(){			console.log("posted data");	
+			$(".myTeamsHolder").html("")
+			$(".addModalPlayer").html("")
+			$('#name').val("")
+			$('#subheading').val("")
+			$('#description').val("")
+			$('#colorPick').val("")
+			$(".newLogo").toggle();
+			trueDate = ''
+			getEmail()
+		})
+  }
+
+  function deleteTeam() {
+  	console.log("hit deleteTeam")
+  	var theTeamDelete = this; 
+  	var teamDelete = theTeamDelete.getAttribute("data-team")
+  	console.log(teamDelete)
+
+  	var $toastDelete = $('<span>Are you sure that you want to delete this team?</span>').add($('<button data-team=' + teamDelete + ' id="yesDeleteTeam" class="btn-flat toast-action">Yes, Delete Team</button>'));
+  	Materialize.toast($toastDelete, 10000);
+  	
+  }
+
+  $(document.body).on("click", '#yesDeleteTeam', callDelete);
+
+  function callDelete(){
+  	var almostDelete = this; 
+  	console.log(almostDelete)
+  	var theDeleteTeam = almostDelete.getAttribute("data-team")
+  	$.ajax({
+      method: "DELETE",
+      url: "/team/delete/" + theDeleteTeam
+    })
+    .done(function() {
+    	Materialize.Toast.removeAll();
+      console.log("Team Deleted")
 			$(".myTeamsHolder").html("")
 			$(".addModalPlayer").html("")
 			$('#name').val("")
@@ -399,10 +445,11 @@ $(document).ready(function() {
 			$('#description').val("")
 			$('#colorPick').val("")
 			trueDate = ''
+			$("#deleteTeamBtn").attr("data-team", "")
 			getEmail()
-		})
+    });
   }
 
   getEmail();
 
-})
+}) // End Document

@@ -89,10 +89,46 @@ module.exports= function(app){
   app.get("/teamInfo/:theteamid", (req, res) => {
     db.teams.findAll({
       where: { 
-        req.params.theteamid
+        id: req.params.theteamid
       }
     }).then(function(data) {
       res.json(data); 
+    });
+  });
+
+  app.put("/api/teams", function(req, res) {
+    db.teams.update({
+      name: req.body.name,
+      subheading: req.body.subheading,
+      description: req.body.description,
+      primaryColor: req.body.primaryColor,
+      image: req.body.image,
+      deadline: req.body.deadline
+    },
+      {
+        where: {
+          id: req.body.id,
+          user_id: req.body.user_id
+        }
+      }
+    ).then(function(data) {
+      res.json(data);
+    });
+  });
+
+  app.delete("/team/delete/:id", function(req, res) {
+    db.players.destroy({
+      where: {
+        team_id: req.params.id
+      }
+    }).then(function() {
+      db.teams.destroy({
+        where: {
+          id: req.params.id
+        }
+      }).then(function(data) {
+        res.json(data);
+      });
     });
   });
 

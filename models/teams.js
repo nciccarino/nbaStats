@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
     updated_at:  DataTypes.DATE
   }, {
     underscored: true
+  },
+  {
+    associate: function(models) {
+      Teams.hasMany(models.Players, { onDelete: 'cascade' });
+    }
   });
   return Teams;
 };

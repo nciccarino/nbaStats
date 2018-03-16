@@ -117,6 +117,10 @@ body {
 	background-color: #999999; 
 }
 
+#deleteTeamBtn {
+	background-color: #f54d27;
+}
+
 .modalTables {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -170,7 +174,8 @@ body {
 	background-color: #e2e1e1;
 }
 
-#colorPick {
+#colorPick,
+#colorPickEdit {
 	width: 40px;
 	height: 40px; 
 	border-style: none; 

@@ -38,8 +38,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       classMethods: {
         associate: function(models) {
-          // Associating Author with Posts
-          // When an Author is deleted, also delete any associated Posts
           User.hasMany(models.teams, {
             onDelete: "cascade"
           });
