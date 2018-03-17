@@ -40,7 +40,9 @@ module.exports= function(app){
 	app.get('/nba/playerCompare/:arr1/:arr2', function(req, res) {
 		nba.stats.playerCompare({
 			PlayerIDList: req.params.arr1,
-			VsPlayerIDList: req.params.arr2
+			VsPlayerIDList: req.params.arr2,
+			dateFrom: "",
+			dateTo: ""
 		}).then(function(data) {
 			res.json(data)
 		}).catch(function(err) {

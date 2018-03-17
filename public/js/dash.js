@@ -1,6 +1,8 @@
 $(document).ready(function() { 
 
 	var userSelect;
+	var teamSelect1;
+	var teamSelect2;
 
 	$(document.body).on("click", '.callCompare', getPlayers);
 
@@ -43,23 +45,37 @@ $(document).ready(function() {
 		var f = document.getElementById("select2");
 		var team2 = f.options[f.selectedIndex].value;
 
-		console.log(team1)
-		console.log(team2)
+		var arrTeam1 = [];
+		var arrTeam2 = []; 
 
 		$.ajax({
 			type: 'GET',
 			url:'/playerInfo/' + team1
 		}).done(function(data){
-			console.log(data)
+			for(var i = 0; i < data.length; i++) {
+				var person = data[i].person_id
+				arrTeam1.push(person)
+			}
+			console.log(arrTeam1)
+		}).then(function() {
+			$.ajax({
+				type: 'GET',
+				url:'/playerInfo/' + team2
+			}).done(function(data){
+				for(var i = 0; i < data.length; i++) {
+					var person = data[i].person_id
+					arrTeam2.push(person)
+				}
+				console.log(arrTeam2)
+			}).then(function() {
+				$.ajax({
+					type: 'GET',
+					url:'/nba/playerCompare/' + arrTeam1 + '/' + arrTeam2
+				}).done(function(data){
+					console.log(data)
+				})
+			})
 		})
-
-		$.ajax({
-			type: 'GET',
-			url:'/playerInfo/' + team2
-		}).done(function(data){
-			console.log(data)
-		})
-
   }
 
   getEmail();
