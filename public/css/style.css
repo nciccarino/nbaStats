@@ -107,7 +107,8 @@ body {
 .draftBtn,
 .removeBtn,
 .newLogoBtn,
-.callCompare {
+.callCompare,
+.callPlayerCompare {
 	background-color: #333333; 
 	margin-right: 5px; 
 }
@@ -117,7 +118,8 @@ body {
 .draftBtn:hover,
 .removeBtn:hover,
 .newLogoBtn:hover,
-.callCompare:hover {
+.callCompare:hover,
+.callPlayerCompare:hover {
 	background-color: #999999; 
 }
 
@@ -258,7 +260,7 @@ body {
 }
 
 .selectHolder {
-	width: 90%;
+	width: 80%;
 	height: 200px;
 	background-color: #636363;
 	margin-top: 20px; 
@@ -267,8 +269,22 @@ body {
 .instructions {
 	padding: 10px; 
 	color: #fff;
+	text-align: center; 
 }
 
-.callCompare {
+.callCompare,
+.callPlayerCompare {
 	margin-left: 20px; 
+}
+
+.progLine {
+	display: none; 
+}
+
+.chartWrapper {
+	display: none; 
+}
+
+.firstDrop {
+	margin-left: 50px; 
 }

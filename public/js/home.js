@@ -2,13 +2,27 @@ $(document).ready(function() {
 
 	$(document.body).on("click", '.actionButton', showDetails);
 
+	// NBA Season Oct 17 – Jun 17
+	// If Oct - Dec, use current year, otherwise -1 for NBA Season year
+
+	var yr;
+	var month = new Date().getMonth()
+
+	if(month == 10 || 11 || 12) {
+		yr = new Date().getFullYear()
+	}
+	if(month < 10) {
+		yr = new Date().getFullYear() - 1 
+	}
+
 	function getTeams() {
+		console.log(yr)
 	  $.ajax({
 	  	method:'GET', 
-	    url: "/nba/teams/"
+	    url: "/nba/teams/" + yr
 	  }).done(function(data) {
 	  	var teams = data.teams.config
-
+	  	console.log(teams)
 	  	var teamLogo = {
 	  		ATL: '../images/logos/hawks.png',
 	  		BKN: '../images/logos/nets.png',
@@ -72,10 +86,10 @@ $(document).ready(function() {
 	function getPlayers() {
 	  $.ajax({
 	  	method:'GET', 
-	    url: "/nba/players/"
+	    url: "/nba/players/" + yr 
 	  }).done(function(data) {
 	  	var players = data.league.standard
-	  	//console.log(players)
+
 	  	for(var i = 0; i < players.length; i++) {
 	  		var card = $("<div id='" + players[i].personId + "'>").addClass("playerCards")
 	  		var col = $("<div>").addClass("col s6 m4")

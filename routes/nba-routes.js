@@ -5,10 +5,10 @@ var stats = require("nba.js").stats;
 
 module.exports= function(app){
 
-	app.get('/nba/teams/', function(req, res){
+	app.get('/nba/teams/:yr', function(req, res){
 
 		nba.data.teamsConfig({
-		  year: 2017
+		  year: req.params.yr 
 		}).then(function(data) {
 		  res.json(data)
 		}).catch(function(err) {
@@ -16,9 +16,9 @@ module.exports= function(app){
 		});
 	});
 
-	app.get('/nba/players/', function(req, res) {
+	app.get('/nba/players/:yr', function(req, res) {
 		nba.data.players({
-		  year: 2017
+		  year: req.params.yr
 		}).then(function(data) {
 		  res.json(data)
 		}).catch(function(err) {

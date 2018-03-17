@@ -1,19 +1,34 @@
 $(document).ready(function() { 
 
+	// global variables
 	var userSelect;
 	var teamSelect1;
 	var teamSelect2;
 
+	// NBA Season Oct 17 – Jun 17
+	// If Oct - Dec, use current year, otherwise -1 for NBA Season year
+
+	var yr;
+	var month = new Date().getMonth()
+
+	if(month == 10 || 11 || 12) {
+		yr = new Date().getFullYear()
+	}
+	if(month < 10) {
+		yr = new Date().getFullYear() - 1 
+	}
+
+	// Event Listeners
 	$(document.body).on("click", '.callCompare', getPlayers);
+	$(document.body).on("click", '.callPlayerCompare', comparePlayers);
 
   function getEmail() {
     $.get("/api/user_data").then(function(data){
-      console.log(data)
       var emailData = data.email; 
       userSelect = data.id; 
       allInfo()
     })
-  }
+  } // done getEmail 
 
   function allInfo() {
 		$.ajax({
@@ -35,9 +50,12 @@ $(document).ready(function() {
 				$("#select2").append(option)
 			}
 		});
-  }
+  } // done allInfo
 
   function getPlayers() {
+
+  	$(".chartWrapper").css("display", "none")
+  	$(".progLine").css("display", "block")
 
   	var e = document.getElementById("select1");
 		var team1 = e.options[e.selectedIndex].value;
@@ -58,7 +76,6 @@ $(document).ready(function() {
 				var person = data[i].person_id
 				arrTeam1.push(person)
 			}
-			console.log(arrTeam1)
 		}).then(function() {
 			$.ajax({
 				type: 'GET',
@@ -68,15 +85,19 @@ $(document).ready(function() {
 					var person = data[i].person_id
 					arrTeam2.push(person)
 				}
-				console.log(arrTeam2)
 			}).then(function() {
 				$.ajax({
 					type: 'GET',
 					url:'/nba/playerCompare/' + arrTeam1 + '/' + arrTeam2
 				}).done(function(data){ 
+
+					$(".progLine").css("display", "none")
+					$(".chartWrapper").css("display", "block")
+
 					console.log(data)
 					var info1 = data.OverallCompare[0];
 					var info2 = data.OverallCompare[1]; 
+					var ind = data.Individual; 
 
 				  var ctx = document.getElementById('myChart').getContext('2d');
 					var chart = new Chart(ctx, {
@@ -180,12 +201,180 @@ $(document).ready(function() {
 					    // Configuration options go here
 					    options: {}
 					});
-
-				})
+				});
 			})
 		})
-  }
+  } // done getPlayers
+
+	function initAuto() {
+	  $.ajax({
+	  	method:'GET', 
+	    url: "/nba/players/" + yr
+	  }).done(function(data) {
+	  	var players = data.league.standard
+	  	console.log(players)
+
+	  	var teamLogo = {
+	  		ATL: '../images/logos/hawks.png',
+	  		BKN: '../images/logos/nets.png',
+	  		BOS: '../images/logos/celtics.png',
+	  		CHA: '../images/logos/hornets.png',
+	  		CHI: '../images/logos/bulls.png', 
+	  		CLE: '../images/logos/cavs.png',
+	  		DAL: '../images/logos/mavs.png',
+	  		DEN: '../images/logos/nuggets.png',
+	  		DET: '../images/logos/pistons.png',
+	  		GSW: '../images/logos/warriors.png',
+	  		HOU: '../images/logos/rockets.png',
+	  		IND: '../images/logos/pacers.png',
+	  		LAC: '../images/logos/clippers.png',
+	  		LAL: '../images/logos/lakers.png',
+	  		MEM: '../images/logos/grizzlies.png',
+	  		MIA: '../images/logos/heat.png',
+	  		MIL: '../images/logos/bucks.svg',
+	  		MIN: '../images/logos/timberwolves.png',
+	  		NOP: '../images/logos/pelicans.png',
+	  		NYK: '../images/logos/knicks.png',
+	  		OKC: '../images/logos/thunder.png',
+	  		ORL: '../images/logos/magic.png',
+	  		PHI: '../images/logos/sixers.png',
+	  		PHX: '../images/logos/suns.png',
+	  		POR: '../images/logos/blazers.png', 
+	  		SAC: '../images/logos/kings.png',
+	  		SAS: '../images/logos/spurs.png',
+	  		TOR: '../images/logos/raptors.png', 
+	  		UTA: '../images/logos/jazz.png',
+	  		WAS: '../images/logos/wizards.png'
+	  	}
+
+	  	var dataAuto = {}; 
+
+	  	for(var i = 0; i < players.length; i++) {
+
+	  		// autolookup section
+
+	  		var img = null; 
+
+	  		if(players[i].teamId == 1610612737) {
+	  			img = teamLogo.ATL
+	  		}
+	  		if(players[i].teamId == 1610612751) {
+	  			img = teamLogo.BKN
+	  		}
+	  		if(players[i].teamId == 1610612738) {
+	  			img = teamLogo.BOS
+	  		}
+	  		if(players[i].teamId == 1610612766) {
+	  			img = teamLogo.CHA
+	  		}
+	  		if(players[i].teamId == 1610612741) {
+	  			img = teamLogo.CHI
+	  		}
+	  		if(players[i].teamId == 1610612739) {
+	  			img = teamLogo.CLE
+	  		}
+	  		if(players[i].teamId == 1610612742) {
+	  			img = teamLogo.DAL
+	  		}
+	  		if(players[i].teamId == 1610612743) {
+	  			img = teamLogo.DEN
+	  		}
+	  		if(players[i].teamId == 1610612765) {
+	  			img = teamLogo.DET
+	  		}
+	  		if(players[i].teamId == 1610612744) {
+	  			img = teamLogo.GSW
+	  		}
+	  		if(players[i].teamId == 1610612745) {
+	  			img = teamLogo.HOU
+	  		}
+	  		if(players[i].teamId == 1610612754) {
+	  			img = teamLogo.IND
+	  		}
+	  		if(players[i].teamId == 1610612744) {
+	  			img = teamLogo.GSW
+	  		}
+	  		if(players[i].teamId == 1610612746) {
+	  			img = teamLogo.LAC
+	  		}
+	  		if(players[i].teamId == 1610612747) {
+	  			img = teamLogo.LAL
+	  		}
+	  		if(players[i].teamId == 1610612763) {
+	  			img = teamLogo.MEM
+	  		}
+	  		if(players[i].teamId == 1610612748) {
+	  			img = teamLogo.MIA
+	  		}
+	  		if(players[i].teamId == 1610612749) {
+	  			img = teamLogo.MIL
+	  		}
+	  		if(players[i].teamId == 1610612750) {
+	  			img = teamLogo.MIN
+	  		}
+	  		if(players[i].teamId == 1610612740) {
+	  			img = teamLogo.NOP
+	  		}
+	  		if(players[i].teamId == 1610612752) {
+	  			img = teamLogo.NYK
+	  		}
+	  		if(players[i].teamId == 1610612760) {
+	  			img = teamLogo.OKC
+	  		}
+	  		if(players[i].teamId == 1610612753) {
+	  			img = teamLogo.ORL
+	  		}
+	  		if(players[i].teamId == 1610612755) {
+	  			img = teamLogo.PHI
+	  		}
+	  		if(players[i].teamId == 1610612756) {
+	  			img = teamLogo.PHX
+	  		}
+	  		if(players[i].teamId == 1610612757) {
+	  			img = teamLogo.POR
+	  		}
+	  		if(players[i].teamId == 1610612758) {
+	  			img = teamLogo.SAC
+	  		}
+	  		if(players[i].teamId == 1610612759) {
+	  			img = teamLogo.SAS
+	  		}
+	  		if(players[i].teamId == 1610612761) {
+	  			img = teamLogo.TOR
+	  		}
+	  		if(players[i].teamId == 1610612762) {
+	  			img = teamLogo.UTA
+	  		}
+	  		if(players[i].teamId == 1610612764) {
+	  			img = teamLogo.WAS
+	  		}
+
+	  		var prop = "" + players[i].firstName + " " + players[i].lastName + " - " + players[i].personId + "";
+	  		dataAuto[prop] = img;
+	  	}
+	  	autoComp(dataAuto)
+	  })
+	}
+
+	function autoComp(data) {
+		$('input.autocomplete').autocomplete({
+			data: data,
+			limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
+			minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+		});  
+	}
+
+	function comparePlayers() {
+
+		var opt1 = $(".auto1").val()
+		var opt2 = $(".auto2").val()
+
+		console.log(opt1)
+		console.log(opt2)
+
+	}
 
   getEmail();
+  initAuto(); 
 
 }) // End Document

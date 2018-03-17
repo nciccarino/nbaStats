@@ -41,7 +41,7 @@
     </div>
     <div class="nav-content">
       <ul class="tabs tabs-transparent">
-        <li class="tab"><a class="active" href="#analysis">Team Analysis</a></li>
+        <li class="tab"><a class="active" href="#analysis">My Teams Analysis</a></li>
         <li class="tab"><a href="#compare">Player Compare</a></li>
       </ul>
     </div>
@@ -64,6 +64,13 @@
         </div>
         <a class="wave-effects wave-light btn callCompare">COMPARE</a>
       </div>
+      
+      <div class="row progLine">
+        <div class="col s12 progress" style="margin-top: 100px; margin-left: 10%; width: 80%">
+            <div class="indeterminate"></div>
+        </div>
+      </div>
+
       <div class="row chartWrapper">
         <div class="col s6">
           <h4 class="instructions">Overall Averages</h4>
@@ -88,7 +95,40 @@
   <!-- Player Compare-->
   <div id="compare" class="col s12">
     <div class="col s12 compareWrapper">
-        
+
+      <div class="row selectHolder">
+        <h4 class="instructions">Select Two Players</h4>
+        <div class="input-field col s12 m4 firstDrop">
+          <i class="material-icons prefix">textsms</i>
+          <input type="text" id="autocomplete-input" class="autocomplete auto1">
+          <label for="autocomplete-input">Player 1</label>
+        </div>
+        <div class="input-field col s12 m4">
+          <i class="material-icons prefix">textsms</i>
+          <input type="text" id="autocomplete-input" class="autocomplete auto2">
+          <label for="autocomplete-input">Player 2</label>
+        </div>
+        <div class="col s12 m4">
+          <a class="wave-effects wave-light btn callPlayerCompare">COMPARE</a>
+        </div>
+      </div>
+      
+      <div class="row progLine">
+        <div class="col s12 progress" style="margin-top: 100px; margin-left: 10%; width: 80%">
+            <div class="indeterminate"></div>
+        </div>
+      </div>
+
+      <div class="row playerCards">
+        <div class="col s12 m6 pCardsWrap">
+          
+        </div>
+      </div>
+
+      <div class="row chartWrapper">
+
+      </div>
+
     </div>
   </div>
   <!-- End Player Compare -->
