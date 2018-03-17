@@ -132,6 +132,16 @@ module.exports= function(app){
     });
   });
 
+  app.get('/playerInfo/:teamid', (req, res) => {
+    db.players.findAll({
+      where: {
+        team_id: req.params.teamid
+      }
+    }).then(function(data) {
+      res.json(data);
+    });
+  });
+
   app.get('/allInfo/:id', (req, res) => {  
       db.users.findAll({
         where: {

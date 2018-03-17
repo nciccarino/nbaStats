@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Trade Deadline</title>
+
+  <!-- CSS and Fonts -->
+  <link href="../css/reset.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/css?family=Cantarell:400i|Caveat" rel="stylesheet">
+  <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="navWrapper nav-extended">
+    <div class="nav-wrapper navHeader">
+      <a href="#" class="brand-logo">
+        <table id="navTable">
+          <tr>
+            <th><img class='bklyn' src="../images/logos/nets.png"></th>
+            <th>Trade Deadline</th> 
+          </tr>
+        </table>
+      </a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class="wave-effects wave-light btn dashPage" href="/home">HOME</a></li>
+        <li><a class="waves-effect waves-light btn logoutBtn">Sign Out</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a class="wave-effects wave-light btn dashPage" href="/home">HOME</a></li>
+        <li><a class="waves-effect waves-light btn logoutBtn">Sign Out</a></li>
+      </ul>
+    </div>
+    <div class="nav-content">
+      <ul class="tabs tabs-transparent">
+        <li class="tab"><a class="active" href="#analysis">Team Analysis</a></li>
+        <li class="tab"><a href="#compare">Player Compare</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- End Nav -->
+  <!-- Team Analysis -->
+  <div id="analysis" class="row analysisWrapper">
+    <div class="col s12">
+      <div class="row selectHolder">
+        <h4 class="instructions">Select Two Teams</h4>
+        <div class="input-field col s12 m6">
+          <select class="icons" id='select1'>
+            <option value="" disabled selected>Team 1</option>
+          </select>
+        </div>
+        <div class="input-field col s12 m6">
+          <select class="icons" id='select2'>
+            <option value="" disabled selected>Team 2</option>
+          </select>
+        </div>
+        <a class="wave-effects wave-light btn callCompare">COMPARE</a>
+      </div>
+    </div>
+  </div>
+  <!-- End Team Analysis -->
+  <!-- Player Compare-->
+  <div id="compare" class="col s12">
+    <div class="col s12 compareWrapper">
+        
+    </div>
+  </div>
+  <!-- End Player Compare -->
+  <!-- Footer -->
+  <footer class="page-footer" id= "footerContainer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h3 class="white-text footerTitles">Contact</h3>
+          <p class="grey-text text-lighten-4">Phone: 973-590-6283</p>
+          <p class="grey-text text-lighten-4">Email: nciccarino@gmail.com</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h3 class="white-text footerTitles">Follow Us On</h3>
+          <a href="https://www.facebook.com/BrooklynNets/" target="_blank" class="socailLinks"><div class="footerLogos" id="facebook"></div></a>
+          <a href="https://www.instagram.com/brooklynnets/" target="_blank" class="socailLinks"><div class="footerLogos" id="instagram"></div></a>
+          <a href="https://twitter.com/BrooklynNets" target="_blank" class="lastSocialLink"><div class="footerLogos" id="twitter"></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        © 2018 Nick Ciccarino | All Rights Reserved | <a class="copyrightNick" href="https://nciccarino.github.io/" target="_blank">Web Design by Nick Ciccarino <i class="material-icons">code</i></a>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../js/logout.js"></script>
+  <script type="text/javascript" src="../js/materialize.js"></script>
+  <script type="text/javascript" src="../js/init.js"></script>
+  <script type="text/javascript" src="../js/dash.js"></script>
+  <!-- End Scripts -->
+  </body>
+</html>

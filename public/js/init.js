@@ -12,5 +12,11 @@
 	    close: 'Ok',
 	    closeOnSelect: false // Close upon selecting a date,
 	  });
+	  $(document).ready(function() {
+    	$('select').material_select();
+  	});
+  	$('select').on('contentChanged', function() {
+		  $(this).material_select();
+		});
   }); // end of document ready
 })(jQuery); // end of jQuery name space
