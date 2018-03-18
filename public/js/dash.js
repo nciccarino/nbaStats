@@ -90,7 +90,6 @@ $(document).ready(function() {
 					type: 'GET',
 					url:'/nba/playerCompare/' + arrTeam1 + '/' + arrTeam2
 				}).done(function(data){ 
-
 					$(".progLine").css("display", "none")
 					$(".chartWrapper").css("display", "block")
 
@@ -124,7 +123,30 @@ $(document).ready(function() {
 					    },
 
 					    // Configuration options go here
-					    options: {}
+					    options: { 
+					      legend: {
+					        labels: {
+					        	fontColor: "white",
+					          fontSize: 18
+					        }
+					      },
+					      scales: {
+					        yAxes: [{
+					          ticks: {
+					            fontColor: "white",
+					            fontSize: 14
+					          }
+					        }],
+					        xAxes: [{
+					          ticks: {
+					            fontColor: "white",
+					            fontSize: 14,
+					            stepSize: 1,
+					            beginAtZero: true
+					          }
+					        }]
+					      }
+					    }
 					});
 
 					var fg3_1 = Math.round(info1.fg3_pct * 100); 
@@ -149,7 +171,14 @@ $(document).ready(function() {
 					    },
 
 					    // Configuration options go here
-					    options: {}
+					    options: { 
+					      legend: {
+					        labels: {
+					          fontColor: "white",
+					          fontSize: 12
+					        }
+					      }
+					    }
 					});
 
 					var fg_1 = Math.round(info1.fg_pct * 100); 
@@ -174,7 +203,14 @@ $(document).ready(function() {
 					    },
 
 					    // Configuration options go here
-					    options: {}
+					    options: { 
+					      legend: {
+					        labels: {
+					          fontColor: "white",
+					          fontSize: 12
+					        }
+					      }
+					    }
 					});
 
 					var ft_1 = Math.round(info1.ft_pct * 100); 
@@ -199,7 +235,14 @@ $(document).ready(function() {
 					    },
 
 					    // Configuration options go here
-					    options: {}
+					    options: { 
+					      legend: {
+					        labels: {
+					          fontColor: "white",
+					          fontSize: 12
+					        }
+					      }
+					    }
 					});
 				});
 			})
@@ -247,7 +290,7 @@ $(document).ready(function() {
 	  		WAS: '../images/logos/wizards.png'
 	  	}
 
-	  	var dataAuto = {}; 
+	  	var dataAuto = {};  
 
 	  	for(var i = 0; i < players.length; i++) {
 
@@ -347,16 +390,16 @@ $(document).ready(function() {
 	  		}
 	  		if(players[i].teamId == 1610612764) {
 	  			img = teamLogo.WAS
-	  		}
+	  		} 
 
-	  		var prop = "" + players[i].firstName + " " + players[i].lastName + " - " + players[i].personId + "";
+	  		var prop = "" + players[i].firstName + " " + players[i].lastName + " | " + players[i].personId + "";
 	  		dataAuto[prop] = img;
 	  	}
-	  	autoComp(dataAuto)
+	  	autoComp1(dataAuto)
 	  })
 	}
 
-	function autoComp(data) {
+	function autoComp1(data) {
 		$('input.autocomplete').autocomplete({
 			data: data,
 			limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
@@ -364,14 +407,219 @@ $(document).ready(function() {
 		});  
 	}
 
+	var playerX;
+	var playerY; 
+	var myX;
+	var myY;
+
+	function splitStringX(stringToSplit, separator) {
+	  var arrX = stringToSplit.split(separator);
+	  var zx = arrX.pop()
+	  myX = arrX[0]
+	  playerX = zx;
+	}
+
+	function splitStringY(stringToSplit, separator) {
+	  var arrY = stringToSplit.split(separator);
+	  var zy = arrY.pop()
+	  myY = arrY[0]
+	  playerY = zy
+	}
+
+	var clone = $("#myChart5").clone()
+
+	function clear5 () {
+  	$('#myChart5').remove(); // this is my <canvas> element
+  	$('#chart5Container').append(clone);
+	}
+
 	function comparePlayers() {
+		var x = $(".auto1").val() 
+		var y = $(".auto2").val() 
+		var sep = " | "
+		splitStringX(x, sep);
+		splitStringY(y, sep);
+		if(x != "" && y != "") {
+			$(".chartWrapper2").css("display", "none")
+  		$(".progLine2").css("display", "block")
+			$.ajax({
+				type: 'GET',
+				url:'/nba/playerCompare/' + playerX + '/' + playerY
+			}).done(function(data){
+				console.log(data)
+				$(".progLine2").css("display", "none")
+				$(".chartWrapper2").css("display", "block")
 
-		var opt1 = $(".auto1").val()
-		var opt2 = $(".auto2").val()
+					console.log(data)
+					var info1 = data.OverallCompare[0];
+					var info2 = data.OverallCompare[1]; 
+					var ind = data.Individual; 
 
-		console.log(opt1)
-		console.log(opt2)
+					var chartContent = document.getElementById('chart5Container');
+					chartContent.innerHTML = '&nbsp;';
+					$('#chart5Container').append('<canvas id="myChart5"><canvas>');       
 
+					var data5 = {
+					        labels: ["Assists", "Blocks", "Blocks Against", "Def Rebounds", "Off Rebounds", "Personal Fouls", "Personal Fouls Drawn", "Steals", "Turnovers", "Plus/Minus"],
+					        datasets: [
+										{
+											label: myX,
+											backgroundColor: 'rgb(52,152,219)',
+											borderColor: 'rgb(52,152,219)',
+											data: [info1.ast, info1.blk, info1.blka, info1.dreb, info1.oreb, info1.pf, info1.pfd, info1.stl, info1.tov, info1.plus_minus]
+										},
+						        {
+											label: myY,
+											backgroundColor: 'rgb(240,164,59)',
+											borderColor: 'rgb(240,164,59)',
+											data: [info2.ast, info2.blk, info2.blka, info2.dreb, info2.oreb, info2.pf, info2.pfd, info2.stl, info2.tov, info2.plus_minus]
+										}	        
+					        ]
+					    }
+
+					ctx = $("#myChart5").get(0).getContext("2d"); 
+				  //var ctx = document.getElementById('myChart5').getContext('2d');
+				  
+					var chart = new Chart(ctx, {
+					    // The type of chart we want to create
+					    type: 'bar',
+
+					    // The data for our dataset
+					    data: data5,
+
+					    // Configuration options go here
+					    options: { 
+					      legend: {
+					        labels: {
+					        	fontColor: "white",
+					          fontSize: 18
+					        }
+					      },
+					      scales: {
+					        yAxes: [{
+					          ticks: {
+					            fontColor: "white",
+					            fontSize: 14
+					          }
+					        }],
+					        xAxes: [{
+					          ticks: {
+					            fontColor: "white",
+					            fontSize: 14,
+					            stepSize: 1,
+					            beginAtZero: true
+					          }
+					        }]
+					      }
+					    },
+					});
+
+					var fg3_1 = Math.round(info1.fg3_pct * 100); 
+					var fg3_2 = Math.round(info2.fg3_pct * 100);
+
+				  var ctx = document.getElementById('myChart8').getContext('2d');
+					var chart = new Chart(ctx, {
+					    // The type of chart we want to create
+					    type: 'doughnut',
+
+					    // The data for our dataset
+					    data: {
+					    		labels: [myX, myY],
+					        datasets: [
+										{
+											label: teamSelect1,
+											backgroundColor: ['rgb(52,152,219)', 'rgb(240,164,59)'],
+											borderColor: ['rgb(52,152,219)', 'rgb(240,164,59)'], 
+											data: [fg3_1, fg3_2]
+										}      
+					        ]
+					    },
+
+					    // Configuration options go here
+					    options: { 
+					      legend: {
+					        labels: {
+					          fontColor: "white",
+					          fontSize: 12
+					        }
+					      }
+					    }
+					});
+
+					var fg_1 = Math.round(info1.fg_pct * 100); 
+					var fg_2 = Math.round(info2.fg_pct * 100);
+
+				  var ctx = document.getElementById('myChart6').getContext('2d');
+					var chart = new Chart(ctx, {
+					    // The type of chart we want to create
+					    type: 'doughnut',
+
+					    // The data for our dataset
+					    data: {
+					    		labels: [myX, myY],
+					        datasets: [
+										{
+											label: teamSelect1,
+											backgroundColor: ['rgb(52,152,219)', 'rgb(240,164,59)'],
+											borderColor: ['rgb(52,152,219)', 'rgb(240,164,59)'], 
+											data: [fg_1, fg_2]
+										}      
+					        ]
+					    },
+
+					    // Configuration options go here
+					    options: { 
+					      legend: {
+					        labels: {
+					          fontColor: "white",
+					          fontSize: 12
+					        }
+					      }
+					    }
+					});
+
+					var ft_1 = Math.round(info1.ft_pct * 100); 
+					var ft_2 = Math.round(info2.ft_pct * 100);
+
+				  var ctx = document.getElementById('myChart7').getContext('2d');
+					var chart = new Chart(ctx, {
+					    // The type of chart we want to create
+					    type: 'doughnut',
+
+					    // The data for our dataset
+					    data: {
+					    		labels: [myX, myY],
+					        datasets: [
+										{
+											label: teamSelect1,
+											backgroundColor: ['rgb(52,152,219)', 'rgb(240,164,59)'],
+											borderColor: ['rgb(52,152,219)', 'rgb(240,164,59)'], 
+											data: [ft_1, ft_2]
+										}      
+					        ]
+					    },
+
+					    // Configuration options go here
+					    options: { 
+					      legend: {
+					        labels: {
+					          fontColor: "white",
+					          fontSize: 12
+					        }
+					      }
+					    }
+					});			
+
+			})
+
+			// 
+		}
+		if(x == "") {
+			$("#selectLabel1").html("Please Select A Player").css("color", "#ff2222")
+		}
+		if(y == "") {
+			$("#selectLabel1").html("Please Select A Player").css("color", "#ff2222")
+		} 
 	}
 
   getEmail();

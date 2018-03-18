@@ -73,20 +73,20 @@
 
       <div class="row chartWrapper">
         <div class="col s6">
-          <h4 class="instructions">Overall Averages</h4>
+          <h5 class="instructions">Overall Averages</h5>
           <canvas id="myChart"></canvas>
         </div>
         <div class= "col s2">
-          <h4 class="instructions">Three Point %</h4>
-          <canvas id="myChart2"></canvas>
+          <h5 class="instructions">Free Throw %</h5>
+          <canvas id="myChart4"></canvas>
         </div>
         <div class= "col s2">
-          <h4 class="instructions">Field Goal %</h4>
+          <h5 class="instructions">Field Goal %</h5>
           <canvas id="myChart3"></canvas>
         </div>
         <div class= "col s2">
-          <h4 class="instructions">Free Throw %</h4>
-          <canvas id="myChart4"></canvas>
+          <h5 class="instructions">Three Point %</h5>
+          <canvas id="myChart2"></canvas>
         </div>
       </div>
     </div>
@@ -101,32 +101,47 @@
         <div class="input-field col s12 m4 firstDrop">
           <i class="material-icons prefix">textsms</i>
           <input type="text" id="autocomplete-input" class="autocomplete auto1">
-          <label for="autocomplete-input">Player 1</label>
+          <label id="selectLabel1" for="autocomplete-input">Player 1</label>
         </div>
         <div class="input-field col s12 m4">
           <i class="material-icons prefix">textsms</i>
           <input type="text" id="autocomplete-input" class="autocomplete auto2">
-          <label for="autocomplete-input">Player 2</label>
+          <label id="selectLabel2" for="autocomplete-input">Player 2</label>
         </div>
         <div class="col s12 m4">
           <a class="wave-effects wave-light btn callPlayerCompare">COMPARE</a>
         </div>
       </div>
       
-      <div class="row progLine">
+      <div class="row progLine2">
         <div class="col s12 progress" style="margin-top: 100px; margin-left: 10%; width: 80%">
             <div class="indeterminate"></div>
         </div>
       </div>
 
-      <div class="row playerCards">
+<!--       <div class="row playerCards">
         <div class="col s12 m6 pCardsWrap">
           
         </div>
-      </div>
+      </div> -->
 
-      <div class="row chartWrapper">
-
+      <div class="row chartWrapper2">
+        <div id="chart5Container" class="col s6">
+          <h5 class="instructions">Overall Averages</h5>
+<!--           <canvas id="myChart5"></canvas> -->
+        </div>
+        <div class= "col s2">
+          <h5 class="instructions">Free Throw %</h5>
+          <canvas id="myChart6"></canvas>
+        </div>
+        <div class= "col s2">
+          <h5 class="instructions">Field Goal %</h5>
+          <canvas id="myChart7"></canvas>
+        </div>
+        <div class= "col s2">
+          <h5 class="instructions">Three Point %</h5>
+          <canvas id="myChart8"></canvas>
+        </div>
       </div>
 
     </div>
