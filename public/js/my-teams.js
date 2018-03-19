@@ -10,6 +10,14 @@ $(document).ready(function() {
 
 	$(document.body).on("click", '.draftBtn', addPlayer);
 	$('#createTeam').on('click', handleAdd)
+	$('#btnMore').on('click', function() {
+		$(".logoMore").css("display", "inline-block")
+		$('#btnMore').css("display", "none")
+	})
+	$('#btnMoreUpdate').on('click', function() {
+		$(".logoUpdate").css("display", "inline-block")
+		$('#btnMoreUpdate').css("display", "none")
+	})
 	$('.logoImages').on('click', getImage)
 	$(document.body).on("click", '.logoImagesForm', getImageTeam);
 	$(document.body).on("click", '#createPlayer', wasHit);
@@ -80,7 +88,7 @@ $(document).ready(function() {
 
 	  		var teamWrapper = $("<li>")
 	  		var teamHeader = $("<div>").addClass("collapsible-header teamHeader " + teams[i].team_id);
-	  		var teamHeaderTri = $('<div style="background-image: url(' + teams[i].image + '); width: 100px; height: 100px; background-position: center center; background-repeat: no-repeat; background-size: cover; "></div>')
+	  		var teamHeaderTri = $('<div class="dropImg" style="background-image: url(' + teams[i].image + ');"></div>')
 	  		var teamHeaderHolder = $("<ul>")
 	  		var teamHeaderTitle = $("<li class='myTeam'>" + teams[i].name + " (" + teams[i].players.length + ")</li>")
 	  		var teamHeaderSub = $("<li class='subheading'>" + teams[i].subheading + "</li>")
@@ -116,15 +124,15 @@ $(document).ready(function() {
 				for(var j = 0; j < players.length; j++) {
 
 		  		var card = $("<div id='" + players[j].person_id + "'>").addClass("playerCards")
-		  		var col = $("<div>").addClass("col s6 m4")
+		  		var col = $("<div>").addClass("col s12 m4")
 		  		var cardClass = $("<div>").addClass("card blue-grey darken-1") 
 
 		  		var cardContent = $("<div>").addClass("card-content white-text")
-		  		var	cardTitle = $("<span>#" + players[j].jersey + " - " + players[j].name + " (" + players[j].position + ")</span>").addClass("card-title playerName") 
+		  		var	cardTitle = $("<span>#" + players[j].jersey + " - " + players[j].name_first + " " + players[j].name_last + " (" + players[j].position + ")</span>").addClass("card-title playerName") 
 
 		  		var cardAction = $("<div>").addClass("card-action playerActions")
-		  		var statsAction = $("<a data-drafted=" + 1 + " data-person=" + players[j].person_id + " data-jersey=" + players[j].jersey + " data-name=" + players[j].name + " data-pos=" + players[j].position + " class='waves-effect waves-light btn actionButton'>View Stats</a>")
-		  		var removeAction = $("<a data-person=" + players[j].player_id + " data-name=" + players[j].name + " data-team=" + players[j].team_id + " class='waves-effect waves-light btn removeBtn'>Cut Player</a>")
+		  		var statsAction = $("<a data-drafted=" + 1 + " data-person=" + players[j].person_id + " data-jersey=" + players[j].jersey + " data-namefirst=" + players[j].name_first + "data-namelast=" + players[j].name_last + " data-pos=" + players[j].position + " class='waves-effect waves-light btn actionButton'>View Stats</a>")
+		  		var removeAction = $("<a data-person=" + players[j].player_id + " data-namefirst=" + players[j].name_first + "data-namelast=" + players[j].name_last + " data-team=" + players[j].team_id + " class='waves-effect waves-light btn removeBtn'>Cut Player</a>")
 
 		  		cardAction.append(statsAction)
 		  		cardAction.append(removeAction)
@@ -265,11 +273,13 @@ $(document).ready(function() {
     var playerlast = thisPlayer.getAttribute("data-namelast")
     var playerJersey = thisPlayer.getAttribute("data-jersey")
     var playerPos	= thisPlayer.getAttribute("data-pos"); 
-    var playerName = playerfirst + " " + playerlast; 
+    // var playerName = playerfirst + " " + playerlast; 
  		
  		addArr = []
     addArr.push(thePlayer)
-    addArr.push(playerName)
+    // addArr.push(playerName)
+    addArr.push(playerfirst)
+    addArr.push(playerlast)
     addArr.push(playerJersey)
     addArr.push(playerPos)
   }
@@ -280,15 +290,17 @@ $(document).ready(function() {
   	console.log(theImage)
 
   	var theId = addArr[0]
-  	var theName = addArr[1]
-  	var theJersey = addArr[2]
-  	var thePos = addArr[3]
+  	var nameFirst = addArr[1]
+  	var nameLast = addArr[2]
+  	var theJersey = addArr[3]
+  	var thePos = addArr[4]
   	var theTeam = theImage
 
   	var newPlayer = {
   		team_id: theTeam,
   		person_id: theId,
-  		name: theName,
+  		name_first: nameFirst,
+  		name_last: nameLast, 
   		jersey: theJersey,
   		position: thePos
   	}
@@ -302,7 +314,7 @@ $(document).ready(function() {
 			$(".myTeamsHolder").html("")
 			$(".addModalPlayer").html("")
 			theImage = null
-			Materialize.toast(theName + ' Added', 6000)
+			Materialize.toast(nameFirst + " " + nameLast + ' Added', 6000)
 			getEmail()
 		})
 
@@ -314,8 +326,9 @@ $(document).ready(function() {
   	var removeP = this;
   	var pID = removeP.getAttribute("data-person")
   	var pTeam = removeP.getAttribute("data-team")
-  	var pName = removeP.getAttribute("data-name") 
-  	var $toastContent = $('<span>Are you sure that you want to cut ' + pName + ' ?</span>').add($('<button data-team=' + pTeam + ' data-id=' + pID + ' class="btn-flat toast-action cutPlayer">Yes, part ways.</button>'));
+  	var pNameFirst = removeP.getAttribute("data-namefirst") 
+  	var pNameLast = removeP.getAttribute("data-namelast")
+  	var $toastContent = $('<span>Are you sure that you want to cut ' + pNameFirst + " " + pNameLast + ' ?</span>').add($('<button data-team=' + pTeam + ' data-id=' + pID + ' class="btn-flat toast-action cutPlayer">Yes, part ways.</button>'));
   	Materialize.toast($toastContent, 10000);
   }
 

@@ -102,7 +102,6 @@ $(document).ready(function() {
 					chartContent0.innerHTML = '&nbsp;';
 					$('#chartContainer').append('<h5 class="instructions">Overall Averages</h5><canvas id="myChart"><canvas>');
 					ctx = $("#myChart").get(0).getContext("2d"); 
-				  // var ctx = document.getElementById('myChart').getContext('2d');
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create  
 
@@ -157,7 +156,10 @@ $(document).ready(function() {
 					var fg3_1 = Math.round(info1.fg3_pct * 100); 
 					var fg3_2 = Math.round(info2.fg3_pct * 100);
 
-				  var ctx = document.getElementById('myChart2').getContext('2d');
+					var chartContent2 = document.getElementById('chartContainer2');
+					chartContent2.innerHTML = '&nbsp;';
+					$('#chartContainer2').append('<h5 class="instructions">Three Point %</h5><canvas id="myChart2"><canvas>');
+					ctx = $("#myChart2").get(0).getContext("2d"); 
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
 					    type: 'doughnut',
@@ -189,7 +191,10 @@ $(document).ready(function() {
 					var fg_1 = Math.round(info1.fg_pct * 100); 
 					var fg_2 = Math.round(info2.fg_pct * 100);
 
-				  var ctx = document.getElementById('myChart3').getContext('2d');
+					var chartContent3 = document.getElementById('chartContainer3');
+					chartContent3.innerHTML = '&nbsp;';
+					$('#chartContainer3').append('<h5 class="instructions">Field Goal %</h5><canvas id="myChart3"><canvas>');
+					ctx = $("#myChart3").get(0).getContext("2d"); 
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
 					    type: 'doughnut',
@@ -221,7 +226,10 @@ $(document).ready(function() {
 					var ft_1 = Math.round(info1.ft_pct * 100); 
 					var ft_2 = Math.round(info2.ft_pct * 100);
 
-				  var ctx = document.getElementById('myChart4').getContext('2d');
+					var chartContent4 = document.getElementById('chartContainer4');
+					chartContent4.innerHTML = '&nbsp;';
+					$('#chartContainer4').append('<h5 class="instructions">Free Throw %</h5><canvas id="myChart4"><canvas>');
+					ctx = $("#myChart4").get(0).getContext("2d"); 
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
 					    type: 'doughnut',
@@ -255,7 +263,6 @@ $(document).ready(function() {
 					$('#chartContainer9').append('<h5 class="instructions">Shooting Averages</h5><canvas id="myChart9"><canvas>');
 					ctx = $("#myChart9").get(0).getContext("2d"); 
 
-				  var ctx = document.getElementById('myChart9').getContext('2d');
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
 					    type: 'horizontalBar',
@@ -577,7 +584,10 @@ $(document).ready(function() {
 					var fg3_1 = Math.round(p1.fg3_pct * 100); 
 					var fg3_2 = Math.round(p2.fg3_pct * 100);
 
-				  var ctx = document.getElementById('myChart8').getContext('2d');
+					var chartContent8 = document.getElementById('chartContainer8');
+					chartContent8.innerHTML = '&nbsp;';
+					$('#chartContainer8').append('<h5 class="instructions">Three Point %</h5><canvas id="myChart8"><canvas>');
+					ctx = $("#myChart8").get(0).getContext("2d"); 
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
 					    type: 'doughnut',
@@ -606,10 +616,13 @@ $(document).ready(function() {
 					    }
 					});
 
-					var fg_1 = Math.round(p1.fg_pct * 100); 
-					var fg_2 = Math.round(p2.fg_pct * 100);
+					var fg_1 = Math.round(p1.ft_pct * 100); 
+					var fg_2 = Math.round(p2.ft_pct * 100);
 
-				  var ctx = document.getElementById('myChart6').getContext('2d');
+					var chartContent6 = document.getElementById('chartContainer6');
+					chartContent6.innerHTML = '&nbsp;';
+					$('#chartContainer6').append('<h5 class="instructions">Free Throw %</h5><canvas id="myChart6"><canvas>');
+					ctx = $("#myChart6").get(0).getContext("2d"); 
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
 					    type: 'doughnut',
@@ -638,10 +651,13 @@ $(document).ready(function() {
 					    }
 					});
 
-					var ft_1 = Math.round(p1.ft_pct * 100); 
-					var ft_2 = Math.round(p2.ft_pct * 100);
+					var ft_1 = Math.round(p1.fg_pct * 100); 
+					var ft_2 = Math.round(p2.fg_pct * 100);
 
-				  var ctx = document.getElementById('myChart7').getContext('2d');
+					var chartContent7 = document.getElementById('chartContainer7');
+					chartContent7.innerHTML = '&nbsp;';
+					$('#chartContainer7').append('<h5 class="instructions">Field Goal %</h5><canvas id="myChart7"><canvas>');
+					ctx = $("#myChart7").get(0).getContext("2d"); 
 					var chart = new Chart(ctx, {
 					    // The type of chart we want to create
 					    type: 'doughnut',
@@ -682,19 +698,19 @@ $(document).ready(function() {
 
 					    // The data for our dataset
 					    data: {
-					        labels: ["Free Throw Attempts", "Free Throws Made", "Field Goal Attempts", "Filed Goasls Made", "3 Point Attempts", "3 Points Made"],
+					        labels: ["Points", "Free Throw Attempts", "Free Throws Made", "Field Goal Attempts", "Filed Goasls Made", "3 Point Attempts", "3 Points Made"],
 					        datasets: [
 										{
 											label: myX,
 											backgroundColor: 'rgb(52,152,219)',
 											borderColor: 'rgb(52,152,219)',
-											data: [p1.fta, p1.ftm, p1.fga, p1.fgm, p1.fg3a, p1.fg3m]
+											data: [p1.pts, p1.fta, p1.ftm, p1.fga, p1.fgm, p1.fg3a, p1.fg3m]
 										},
 						        {
 											label: myY,
 											backgroundColor: 'rgb(240,164,59)',
 											borderColor: 'rgb(240,164,59)',
-											data: [p2.fta, p2.ftm, p2.fga, p2.fgm, p2.fg3a, p2.fg3m]
+											data: [p2.pts, p2.fta, p2.ftm, p2.fga, p2.fgm, p2.fg3a, p2.fg3m]
 										}	        
 					        ]
 					    },

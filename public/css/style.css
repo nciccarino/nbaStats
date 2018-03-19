@@ -77,6 +77,15 @@ body {
 	text-align: center;
 	text-transform: uppercase;
 }
+
+@media only screen and (max-width : 600px) {
+  .tts,
+  .myTeam,
+  .subheading {
+    font-size: 16px; 
+  }
+}
+
 .myTeam {
 	padding-left: 20px; 
 	padding-top: 20px;
@@ -111,6 +120,14 @@ body {
 .callPlayerCompare {
 	background-color: #333333; 
 	margin-right: 5px; 
+	margin-bottom: 10px; 
+}
+
+@media only screen and (max-width : 600px) {
+  .callCompare,
+  .callPlayerCompare {
+    margin-left: 75px;
+  }
 }
 
 .actionButton:hover,
@@ -191,6 +208,7 @@ body {
 .logoImages {
 	width: 70px;
 	height: 70px;
+	margin-bottom: 10px; 
 	margin-right: 20px;
 	border-width: 3px;
 	border-style: solid;
@@ -293,4 +311,67 @@ body {
 
 .chartRow {
 	margin-top: 40px; 
+}
+
+.introHeaders {
+	text-align: center;
+	color: #fff; 
+	padding-bottom: 20px;
+	border-bottom-style: solid;
+	border-bottom-color: #fff;
+	border-bottom-width: 2px; 
+}
+
+.introPic {
+	width: 200px;
+	height: 200px; 
+	margin-left: 30%;
+	margin-top: 20%; 
+}
+
+@media only screen and (max-width : 600px) {
+  .introPic {
+    margin-left: 20%;
+  }
+}
+
+.introText {
+	color: #fff;
+	text-align: left; 
+}
+
+#btnMore,
+#btnMoreUpdate {
+	margin-top: 20px; 
+	margin-left: 40%;
+	background-color: #333333; 
+}
+
+.newLogoBtn {
+	background-color: #333333;
+	margin-left: 38%; 
+}
+
+.logoMore,
+.logoUpdate {
+	display: none; 
+}
+
+.statTables {
+	overflow-x: auto;
+}
+
+.dropImg {
+	width: 100px; 
+	height: 100px; 
+	background-position: center center; 
+	background-repeat: no-repeat; 
+	background-size: cover; 
+}
+
+@media only screen and (max-width : 600px) {
+  .dropImg {
+    width: 70px;
+    height: 70px;
+  }
 }

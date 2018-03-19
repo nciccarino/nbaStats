@@ -65,7 +65,8 @@ module.exports= function(app){
     db.players.create({
       team_id: req.body.team_id,
       person_id: req.body.person_id,
-      name: req.body.name,
+      name_first: req.body.name_first,
+      name_last: req.body.name_last,
       jersey: req.body.jersey,
       position: req.body.position
     }).then(function(data) {
@@ -191,7 +192,8 @@ module.exports= function(app){
                           player_id: player.id,
                           team_id: player.team_id,
                           person_id: player.person_id,
-                          name: player.name,
+                          name_first: player.name_first,
+                          name_last: player.name_last, 
                           jersey: player.jersey,
                           position: player.position
                         }

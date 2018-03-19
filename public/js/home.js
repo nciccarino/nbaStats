@@ -63,7 +63,7 @@ $(document).ready(function() {
 	  		var teamWrapper = $("<li>")
 	  		var teamHeader = $("<div>").addClass("collapsible-header teamHeader " + teams[i].teamId);
 	  		// var teamHeaderTri = $("<img src=" + teamLogo[tricode] + " class='tri'>")
-	  		var teamHeaderTri = $('<div style="background-image: url(' + teamLogo[tricode] + '); width: 100px; height: 100px; background-position: center center; background-repeat: no-repeat; background-size: cover; "></div>')
+	  		var teamHeaderTri = $('<div class="dropImg" style="background-image: url(' + teamLogo[tricode] + ');"></div>')
 	  		var teamHeaderTitle = $("<div class='tts'>" + teams[i].ttsName + "</div>")
 				var teamBody = $("<div id='" + teams[i].teamId + "' style='background-color: " + teams[i].primaryColor +"'>").addClass("collapsible-body row teamSection")
 
@@ -92,7 +92,7 @@ $(document).ready(function() {
 
 	  	for(var i = 0; i < players.length; i++) {
 	  		var card = $("<div id='" + players[i].personId + "'>").addClass("playerCards")
-	  		var col = $("<div>").addClass("col s6 m4")
+	  		var col = $("<div>").addClass("col s12 m4")
 	  		var cardClass = $("<div>").addClass("card blue-grey darken-1") 
 
 	  		var cardContent = $("<div>").addClass("card-content white-text")
@@ -236,9 +236,10 @@ $(document).ready(function() {
 	    playerInfo = "#" + playerJersey + " - " + playerfirst + " " + playerlast
 	    document.getElementById('modalHeader').innerHTML = playerInfo
 		} else if(thisPlayer.getAttribute("data-drafted") == 1) {
-    	var playerFull = thisPlayer.getAttribute("data-name")
+    	var playerFirst = thisPlayer.getAttribute("data-namefirst")
+    	var playerLast = thisPlayer.getAttribute("data-namelast")
     	var playerPos = thisPlayer.getAttribute("data-pos")
-    	playerInfo = "#" + playerJersey + " - " + playerFull + " (" + playerPos + ")"
+    	playerInfo = "#" + playerJersey + " - " + playerFirst + " " + playerLast + " (" + playerPos + ")"
       document.getElementById('modalHeader').innerHTML = playerInfo
     }
     
@@ -257,22 +258,22 @@ $(document).ready(function() {
 
 			var totalsLi = $('<li>').addClass('tableLi')
       var totalsCol = $('<div class="collapsible-header">NBA and College Career Totals</div>').addClass('liCol')
-      var totalsTab = $('<div class="collapsible-body"></div>')
+      var totalsTab = $('<div class="statTables collapsible-body"></div>')
 	    var totalsTable = $('<table class="modalTables">')
 			
 			var regLi = $('<li>').addClass('tableLi')
       var regCol = $('<div class="collapsible-header">NBA Regular Sesaon Totals</div>').addClass('liCol')
-      var regTab = $('<div class="collapsible-body"></div>')
+      var regTab = $('<div class="statTables collapsible-body"></div>')
 	    var regTable = $('<table class="modalTables">')
 
 			var collLi = $('<li>').addClass('tableLi')
       var collCol = $('<div class="collapsible-header">College Regular Sesaon Totals</div>').addClass('liCol')
-      var collTab = $('<div class="collapsible-body"></div>')
+      var collTab = $('<div class="statTables collapsible-body"></div>')
 	    var collTable = $('<table class="modalTables">')
 
 			var rankLi = $('<li>').addClass('tableLi')
       var rankCol = $('<div class="collapsible-header">NBA Regular Sesaon Rankings</div>').addClass('liCol')
-      var rankTab = $('<div class="collapsible-body"></div>')
+      var rankTab = $('<div class="statTables collapsible-body"></div>')
 	    var rankTable = $('<table class="modalTables">')
 
 	    // Totals    
