@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	var userSelect;
 	var trueDate; 
-	var src = "../images/logos/nets.png"; 
+	var src = "../images/logos/nba.png"; 
 	var theImage; 
 	var hit = false; 
 	var addArr = [];
@@ -328,7 +328,7 @@ $(document).ready(function() {
   	var pTeam = removeP.getAttribute("data-team")
   	var pNameFirst = removeP.getAttribute("data-namefirst") 
   	var pNameLast = removeP.getAttribute("data-namelast")
-  	var $toastContent = $('<span>Are you sure that you want to cut ' + pNameFirst + " " + pNameLast + ' ?</span>').add($('<button data-team=' + pTeam + ' data-id=' + pID + ' class="btn-flat toast-action cutPlayer">Yes, part ways.</button>'));
+  	var $toastContent = $('<span>Are you sure that you want to cut this player?</span>').add($('<button data-team=' + pTeam + ' data-id=' + pID + ' class="btn-flat toast-action cutPlayer">Yes, part ways.</button>'));
   	Materialize.toast($toastContent, 10000);
   }
 
